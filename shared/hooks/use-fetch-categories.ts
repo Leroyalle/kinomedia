@@ -6,7 +6,7 @@ export async function useFetchCategories(): Promise<CategoriesDTO[]> {
     const items = await Api.categories.getAll();
     return items;
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error('Error [CATEGORIES_GET]', error);
     throw error;
   }
 }

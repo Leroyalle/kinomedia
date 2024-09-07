@@ -9,7 +9,7 @@ interface State {
   fetchMedia: (params: string) => void;
 }
 
-export const useMediaStore = create<State>()((set) => ({
+export const useMoviesStore = create<State>()((set) => ({
   items: {
     docs: [],
   },

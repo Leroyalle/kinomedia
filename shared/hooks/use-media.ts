@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useMediaStore } from '@/shared/store/media';
+import { useMoviesStore } from '@/shared/store/movies';
 import { MediaDTO } from '@/@types/mediaDTO';
 import { useCategoryStore } from '@/shared/store';
 
@@ -12,7 +12,7 @@ interface ReturnProps {
 }
 
 export const useMedia = (isSeries: boolean): ReturnProps => {
-  const mediaStore = useMediaStore((state) => state);
+  const mediaStore = useMoviesStore((state) => state);
   const [name, reset] = useCategoryStore((state) => [state.name, state.reset]);
   const isMounted = React.useRef(false);
 
