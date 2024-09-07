@@ -79,10 +79,11 @@
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: rgb(64, 77, 96);
+  background: hsl(var(--primary));
   border-radius: 6px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgb(54, 64, 81);
+  background: hsl(var(--primary));
+  opacity: 0.8;
 }

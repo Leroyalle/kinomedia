@@ -1,16 +1,18 @@
-import { MediaDTO, MovieDTO } from '@/@types/mediaDTO';
+import { MediaDTO } from '@/@types/mediaDTO';
 import { Api } from '@/shared/services/api-client';
 import { create } from 'zustand';
 
 interface State {
-  items: MediaDTO | null;
+  items: MediaDTO;
   loading: boolean;
   error: boolean;
   fetchMedia: (params: string) => void;
 }
 
 export const useMediaStore = create<State>()((set) => ({
-  items: null,
+  items: {
+    docs: [],
+  },
   loading: true,
   error: false,
   fetchMedia: async (params) => {

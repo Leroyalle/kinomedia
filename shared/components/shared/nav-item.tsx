@@ -7,13 +7,16 @@ import { usePathname } from 'next/navigation';
 interface Props {
   text: string;
   href: string;
+
+  onClick?: () => void;
   className?: string;
 }
 
-export const NavItem: React.FC<Props> = ({ text, href, className }) => {
+export const NavItem: React.FC<Props> = ({ text, href, onClick, className }) => {
   const pathname = usePathname();
   return (
     <Link
+      onClick={onClick}
       href={href}
       className={cn(
         'block px-3 py-1',

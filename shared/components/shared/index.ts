@@ -9,3 +9,4 @@ export { MediaItem } from './media-item';
 export { Categories } from './categories';
 export { MediaCollectionsGroups } from './media-collections-groups';
 export { MediaItemsSkeleton } from './media-items-skeleton';
+export { SortBar } from './sort-bar';

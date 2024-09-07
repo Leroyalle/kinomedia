@@ -27,10 +27,10 @@ export const MediaItem: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <Link href={`/media/${id}`}>
+    <Link href={`/media/${id}`} className="transition ease-in-out duration-500 hover:scale-105">
       <div className={cn('grid grid-rows-[4fr,1fr] max-w-[250px]', className)}>
         <div className="relative flex flex-col">
-          <div className="absolute top-5 right-5 grid place-items-center ">
+          <div className="absolute top-5 left-5 grid place-items-center">
             <Badge ratingKp={ratingKp} />
           </div>
           <Image previewUrl={previewUrl} name={name} />

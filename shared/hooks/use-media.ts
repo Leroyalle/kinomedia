@@ -1,21 +1,34 @@
+'use client';
 import React from 'react';
-import { useMediaStore } from '@/store/media';
+import { useMediaStore } from '@/shared/store/media';
 import { MediaDTO } from '@/@types/mediaDTO';
-import { useCategoryState } from '@/store';
+import { useCategoryStore } from '@/shared/store';
 
 interface ReturnProps {
-  items: MediaDTO | null;
+  items: MediaDTO;
   loading: boolean;
   error: boolean;
   fetchMedia: (params: string) => void;
 }
 
-export const useMedia = (): ReturnProps => {
+export const useMedia = (isSeries: boolean): ReturnProps => {
   const mediaStore = useMediaStore((state) => state);
-  const name = useCategoryState((state) => state.name);
+  const [name, reset] = useCategoryStore((state) => [state.name, state.reset]);
+  const isMounted = React.useRef(false);
+
+  const nameParam = name === '' ? '' : `&genres.name=${name}`;
+  const isSeriesParams = isSeries
+    ? `&notNullFields=seriesLength&isSeries=true`
+    : `&notNullFields=movieLength&isSeries=false`;
   React.useEffect(() => {
-    mediaStore.fetchMedia(`genres.name=${name}`);
-  }, []);
+    if (isMounted.current) {
+      mediaStore.fetchMedia(`${nameParam}${isSeriesParams}`);
+    } else {
+      reset();
+      mediaStore.fetchMedia(isSeriesParams);
+    }
+    isMounted.current = true;
+  }, [name]);
 
   return mediaStore;
 };

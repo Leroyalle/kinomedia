@@ -6,21 +6,22 @@ import { MovieDTO } from '@/@types/mediaDTO';
 import { MediaItemsSkeleton } from './media-items-skeleton';
 
 interface Props {
-  items?: MovieDTO[];
+  items: MovieDTO[];
+  title?: string;
   loading: boolean;
   className?: string;
 }
 
-export const MediaGroup: React.FC<Props> = ({ items, loading, className }) => {
+export const MediaGroup: React.FC<Props> = ({ items, title, loading, className }) => {
   if (!items || loading) {
     return <MediaItemsSkeleton limit={20} />;
   }
 
   return (
     <div className={cn('flex flex-col justify-center gap-2', className)}>
-      {/* <Title size="lg" text={title} /> */}
+      {title && <Title size="lg" text={title} />}
       <div className="flex items-center gap-10 flex-wrap w-fit justify-center">
-        {items?.map((item) => (
+        {items.map((item) => (
           <MediaItem
             key={item.id}
             id={item.id}
