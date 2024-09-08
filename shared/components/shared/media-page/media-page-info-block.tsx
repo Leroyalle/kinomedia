@@ -6,6 +6,7 @@ import { MediaPageDescription } from './content/media-page-description';
 import { MediaItem } from '@/@types/media-item';
 import { Actors, Info, Titles } from './info';
 import { filterPersonsData } from '@/shared/lib';
+import { HealthWarningContent } from '../health-warning-content';
 
 interface Props {
   item: MediaItem;
@@ -23,11 +24,14 @@ export const MediaPageInfoBlock: React.FC<Props> = ({ item, className }) => {
     <section className={cn('flex flex-col gap-3', className)}>
       <Titles value={value} onClick={onChangeInfo} />
       {value === 1 && (
-        <MediaPageDescription
-          isItLong={true}
-          description={item.description || ''}
-          className={'text-[20px]'}
-        />
+        <>
+          <MediaPageDescription
+            isItLong={true}
+            description={item.description || ''}
+            className={'text-[20px]'}
+          />
+          {item.ageRating >= 18 && <HealthWarningContent />}
+        </>
       )}
       {value === 2 && <Actors data={filterPersonsData(item.persons)} />}
       {value === 3 && (

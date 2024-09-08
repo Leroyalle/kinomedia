@@ -12,11 +12,10 @@ interface Props {
 }
 
 export const SortBar: React.FC<Props> = ({ items, isSeries, className }) => {
-  const [activeId, setActiveId, setName, reset] = useCategoryStore((state) => [
+  const [activeId, setActiveId, setName] = useCategoryStore((state) => [
     state.activeId,
     state.setActiveId,
     state.setName,
-    state.reset,
   ]);
   const onChangeCategory = (id: number, name: string) => {
     setActiveId(id);

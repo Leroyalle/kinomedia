@@ -18,6 +18,7 @@
     "nextjs-toploader": "^3.6.15",
     "react": "^18",
     "react-dom": "^18",
+    "swiper": "^11.1.12",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^4.5.5"

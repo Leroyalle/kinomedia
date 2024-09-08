@@ -12,3 +12,5 @@ export { MediaItemsSkeleton } from './media-items-skeleton';
 export { SortBar } from './sort-bar';
 export { MediaPageWrapper } from './media-page-wrapper';
 export { BackButton } from './back-button';
+export { HealthWarningContent } from './health-warning-content';
+export { Description } from './description';

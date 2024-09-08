@@ -15,7 +15,7 @@ const buttonVariants = cva(
         secondary:
           'text-white bg-transparent transition-all bg-[linear-gradient(90deg,#48078f,#004fd6)] hover:opacity-80',
         ghost: 'duration-300 ease-in-out bg-gray-800 p-6 rounded-xl hover:opacity-80',
-        link: 'text-primary underline-offset-4 hover:underline',
+        link: 'text-white/70 transition hover:text-white',
       },
       size: {
         default: 'h-10 px-4 py-2',

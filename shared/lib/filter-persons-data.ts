@@ -6,6 +6,6 @@ export const filterPersonsData = (data: PersonData[]) => {
     acc[profession] = data.filter((item) => item.profession === profession);
     return acc;
   }, {} as Record<string, PersonData[]>);
-  console.log(groupedActors);
+
   return groupedActors;
 };

@@ -32,7 +32,7 @@ export const MediaPageInformation: React.FC<Props> = ({
   const normalizeHours = hours ? hours + ' ч' : '';
   const normalizeMinutes = minutes ? minutes + ' мин' : '';
   return (
-    <div className={cn('grid grid-cols-2 gap-y-4 max-w-[600px]', className)}>
+    <div className={cn('grid grid-cols-2 gap-x-4 gap-y-4 max-w-[600px]', className)}>
       {countries && (
         <div className="flex flex-col">
           <p className="text-white/50 text-[22px] font-medium">Страны</p>
@@ -51,7 +51,7 @@ export const MediaPageInformation: React.FC<Props> = ({
           <div>
             {genres.map(({ name }, i) => (
               <Link href={'/'} className="text-[20px] transition hover:text-[#bc88ff]" key={i}>
-                {name.charAt(0).toUpperCase() + name.slice(1)}
+                {name.charAt(0).toUpperCase() + name.slice(1) + ' '}
               </Link>
             ))}
           </div>

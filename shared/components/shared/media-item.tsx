@@ -28,7 +28,7 @@ export const MediaItem: React.FC<Props> = ({
 }) => {
   return (
     <Link href={`/media/${id}`} className="transition ease-in-out duration-500 hover:scale-105">
-      <div className={cn('grid grid-rows-[4fr,1fr] max-w-[250px]', className)}>
+      <div className={cn('flex flex-col max-w-[250px]', className)}>
         <div className="relative flex flex-col ">
           <div className="absolute top-5 left-5 grid place-items-center">
             <Badge
@@ -38,7 +38,7 @@ export const MediaItem: React.FC<Props> = ({
           </div>
           <Image previewUrl={previewUrl} name={name} />
         </div>
-        <div className="flex items-start flex-col mt-1 grow">
+        <div className="flex items-start flex-col mt-1">
           <Info
             name={name}
             year={year}

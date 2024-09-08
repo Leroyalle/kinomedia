@@ -20,7 +20,7 @@ export const MediaGroup: React.FC<Props> = ({ items, title, loading, className }
   return (
     <div className={cn('flex flex-col justify-center gap-2', className)}>
       {title && <Title size="lg" text={title} />}
-      <div className="flex items-center gap-10 flex-wrap w-fit justify-center">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 justify-center">
         {items.map((item) => (
           <MediaItem
             key={item.id}

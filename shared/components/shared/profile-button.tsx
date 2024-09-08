@@ -9,7 +9,9 @@ interface Props {
 export const ProfileButton: React.FC<Props> = ({ className }) => {
   return (
     <Link href="/profile">
-      <Button className="text-xl">Войти</Button>
+      <Button className="text-md" variant={'link'}>
+        Войти
+      </Button>
     </Link>
   );
 };

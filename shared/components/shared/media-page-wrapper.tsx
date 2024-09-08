@@ -5,6 +5,8 @@ import { MediaPageBackdrop } from './media-page/media-page-backdrop';
 import { cn } from '@/shared/lib/utils';
 import { BackButton } from './back-button';
 import { MediaPageInfoBlock } from './media-page/media-page-info-block';
+import { MediaPageCreators } from './media-page/media-page-creators';
+import { Title } from './title';
 
 interface Props {
   item: MediaItem;
@@ -27,7 +29,13 @@ export const MediaPageWrapper: React.FC<Props> = ({ item, className }) => {
         </div>
       </section>
       <MediaPageInfoBlock item={item} />
-      <div className="pb-[50%]"></div>
+      <div className="flex flex-col gap-2 mt-10">
+        <Title text="Актеры и создатели" size={'md'} />
+        <div>
+          <MediaPageCreators persons={item.persons} />
+        </div>
+      </div>
+      <div className="pb-[50%]" />
     </div>
   );
 };
