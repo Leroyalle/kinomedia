@@ -39,20 +39,20 @@ export const Categories: React.FC<Props> = ({ title, items, activeId, onChange, 
             activeId === 0 &&
               'bg-[linear-gradient(90deg,#48078f,#004fd6)] opacity-100 transition-all',
           )}
-          variant={'secondary'}>
+          variant={'ghost'}>
           Все категории
         </Button>
         {items?.map((item, i) => (
           <Button
             key={i}
+            variant={'ghost'}
             onClick={() => onChange(i + 1, item.name)}
             className={cn(
               'flex items-center transition-all duration-300 ease-in-out bg-gray-800 p-6 rounded-xl',
               'hover:opacity-80 text-lg',
               activeId === i + 1 &&
                 'bg-[linear-gradient(90deg,#48078f,#004fd6)] opacity-100 transition-all',
-            )}
-            variant={'secondary'}>
+            )}>
             {item.name}
           </Button>
         ))}

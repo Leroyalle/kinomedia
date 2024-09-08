@@ -19,17 +19,24 @@ export const Header: React.FC<Props> = ({ className }) => {
     <>
       <header
         className={cn(
-          'sticky top-0 z-10 transition-[250ms] ease-in-out duration-300',
-          !visible && '-top-20',
+          'sticky top-0 z-50 transition-[250ms] ease-in-out duration-300',
+          !visible && '-top-28',
           className,
         )}>
-        <Container className="flex justify-between items-center py-6 bg-black">
-          <Link href="/">
-            <div className="flex items-center gap-3">
-              <Image src="https://tvoe.live/img/full-logo.svg" width={125} height={40} alt="Logo" />
-            </div>
-          </Link>
-          <NavBar />
+        <Container className="flex justify-between items-center py-5 bg-black">
+          <div className="flex items-center gap-24">
+            <Link href="/">
+              <div className="flex items-center gap-3">
+                <Image
+                  src="https://tvoe.live/img/full-logo.svg"
+                  width={125}
+                  height={30}
+                  alt="Logo"
+                />
+              </div>
+            </Link>
+            <NavBar />
+          </div>
           <div className="flex items-center gap-8">
             <SearchInput />
             <ProfileButton />

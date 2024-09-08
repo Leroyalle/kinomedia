@@ -28,8 +28,12 @@ export interface MediaItem {
   totalSeriesLength: number | null;
   seriesLength: number | null;
   ratingMpaa: string | null;
-  ageRating: string | null;
+  ageRating: number;
   poster: {
+    url: string;
+    previewUrl: string;
+  };
+  backdrop: {
     url: string;
     previewUrl: string;
   };

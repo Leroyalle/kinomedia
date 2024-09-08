@@ -25,7 +25,7 @@ export const NavItem: React.FC<Props> = ({ text, href, onClick, className }) => 
       )}>
       <span
         className={cn(
-          `text-[16px] transition-all block text-white/60`,
+          `text-[16px] transition-all block text-white/60 hover:text-white`,
           pathname === href && 'text-white',
         )}>
         {text}
