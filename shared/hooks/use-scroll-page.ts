@@ -13,7 +13,6 @@ export const useScrollPage = () => {
       } else {
         setVisible(false);
       }
-      console.log(currentScrollPos);
       prevScrollPos = currentScrollPos;
     };
     window.addEventListener('scroll', handleScroll);

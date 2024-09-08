@@ -12,7 +12,7 @@ export const BackButton: React.FC<Props> = ({ className }) => {
   const router = useRouter();
   return (
     <button onClick={() => router.back()} className={cn('flex items-center z-20', className)}>
-      <ChevronLeft size={18} /> назад
+      <ChevronLeft size={18} /> Назад
     </button>
   );
 };

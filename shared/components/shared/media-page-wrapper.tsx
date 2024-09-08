@@ -4,6 +4,7 @@ import { MediaPageContent } from './media-page/media-page-content';
 import { MediaPageBackdrop } from './media-page/media-page-backdrop';
 import { cn } from '@/shared/lib/utils';
 import { BackButton } from './back-button';
+import { MediaPageInfoBlock } from './media-page/media-page-info-block';
 
 interface Props {
   item: MediaItem;
@@ -12,17 +13,21 @@ interface Props {
 
 export const MediaPageWrapper: React.FC<Props> = ({ item, className }) => {
   return (
-    <section
-      className={cn(`relative flex justify-between items-top h-full backdrop-shadow`, className)}>
-      <div className="pb-[45%] block" />
-      <MediaPageBackdrop
-        imageUrl={item.backdrop?.url}
-        className="absolute w-full h-full inset-0 -z-10"
-      />
-      <BackButton className="absolute top-4 left-0" />
-      <div className="absolute w-full h-full flex items-center top-0 left-0">
-        <MediaPageContent item={item} className="" />
-      </div>
-    </section>
+    <div>
+      <section
+        className={cn(`relative flex justify-between items-top h-full backdrop-shadow`, className)}>
+        <div className="pb-[45%] block" />
+        <MediaPageBackdrop
+          imageUrl={item.backdrop?.url}
+          className="absolute w-full h-full inset-0 -z-10"
+        />
+        <BackButton className="absolute top-4 left-0" />
+        <div className="absolute w-full h-full flex items-center top-0 left-0">
+          <MediaPageContent item={item} className="" />
+        </div>
+      </section>
+      <MediaPageInfoBlock item={item} />
+      <div className="pb-[50%]"></div>
+    </div>
   );
 };
