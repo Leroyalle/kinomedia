@@ -28,7 +28,7 @@ export const MediaItem: React.FC<Props> = ({
 }) => {
   return (
     <Link href={`/media/${id}`} className="transition ease-in-out duration-500 hover:scale-105">
-      <div className={cn('flex flex-col max-w-[250px]', className)}>
+      <div className={cn('max-w-[250px] flex flex-col ', className)}>
         <div className="relative flex flex-col ">
           <div className="absolute top-5 left-5 grid place-items-center">
             <Badge

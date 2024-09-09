@@ -5,6 +5,7 @@ export { ProfileButton } from './profile-button';
 export { NavItem } from './nav-item';
 export { Providers } from './providers';
 export { MediaGroup } from './media-group';
+export { MediaGroupSlider } from './media-group-slider';
 export { MediaItem } from './media-item';
 export { Categories } from './categories';
 export { MediaCollectionsGroups } from './media-collections-groups';

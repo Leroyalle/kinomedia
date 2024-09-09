@@ -1,5 +1,6 @@
-export { MediaPageContent } from './media-page-content';
-export { MediaPageBackdrop } from './media-page-backdrop';
-export { MediaPageInfoBlock } from './media-page-info-block';
-export { MediaPageCreators } from './media-page-creators';
-export { MediaPageCreatorsItem as Creator } from './media-page-creators-item';
+export { MediaPageBackdrop as Backdrop } from './media-page-backdrop';
+export { MediaPageContent as Content } from './media-page-content';
+export { MediaPageInfoBlock as InfoBlock } from './media-page-info-block';
+export { MediaPageCreators as Creators } from './media-page-creators';
+export { MediaPageSimilarMovies as SimilarMovies } from './media-page-similar-movies';
+export { MediaPageCreatorsItem } from './media-page-creators-item';

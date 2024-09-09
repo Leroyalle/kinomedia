@@ -24,7 +24,12 @@ export const MediaItemInfo: React.FC<Props> = ({
     <>
       <p className={cn(className)}>{name}</p>
       <p className={cn(className)}>
-        {year}, {movieLength ? `${normalizeHours} ${normalizeMinutes}` : `${seriesLength} серий`}
+        {year}{' '}
+        {movieLength || seriesLength
+          ? movieLength
+            ? `${normalizeHours} ${normalizeMinutes}`
+            : `${seriesLength} серий`
+          : ''}
       </p>
     </>
   );

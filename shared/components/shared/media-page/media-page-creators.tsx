@@ -25,10 +25,10 @@ export const MediaPageCreators: React.FC<Props> = ({ persons, className }) => {
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}>
       {persons.map((person, i) => (
-        <SwiperSlide className="mr-0" key={i}>
+        <SwiperSlide className="transition hover:-translate-y-1" key={i}>
           <MediaPageCreatorsItem
             imageUrl={person.photo}
-            name={person.name}
+            name={person.name ?? person.enName}
             profession={person.profession}
           />
         </SwiperSlide>

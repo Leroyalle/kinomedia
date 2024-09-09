@@ -11,8 +11,11 @@ interface Props {
 export const BackButton: React.FC<Props> = ({ className }) => {
   const router = useRouter();
   return (
-    <button onClick={() => router.back()} className={cn('flex items-center z-20', className)}>
-      <ChevronLeft size={18} /> Назад
+    <button
+      onClick={() => router.back()}
+      className={cn('flex items-center z-20 transition hover:opacity-85', className)}>
+      <ChevronLeft size={18} />
+      <span>Назад</span>
     </button>
   );
 };

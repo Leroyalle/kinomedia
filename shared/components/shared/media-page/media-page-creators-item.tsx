@@ -5,6 +5,7 @@ import Image from 'next/image';
 interface Props {
   imageUrl: string;
   name: string;
+
   profession: string;
 }
 
