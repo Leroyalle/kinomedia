@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@/shared/components/shared';
+import { Footer, Header } from '@/shared/components/shared';
 
 export const metadata: Metadata = {
   title: 'Kinomedia',
@@ -14,6 +14,7 @@ export default function HomeLayout({
     <main className="min-h-screen">
       <Header />
       {children}
+      <Footer />
     </main>
   );
 }

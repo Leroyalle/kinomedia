@@ -30,7 +30,6 @@ export const MediaPageWrapper: React.FC<Props> = ({ item, className }) => {
         </div>
       </div>
       <SimilarMovies id={item.id} />
-      <div className="pb-[50%]" />
     </div>
   );
 };

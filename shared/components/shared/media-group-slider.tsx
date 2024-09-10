@@ -45,7 +45,7 @@ export const MediaGroupSlider: React.FC<Props> = ({
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log('slide change')}>
           {items.map((item, i) => (
-            <SwiperSlide key={i}>
+            <SwiperSlide className="transition ease-in-out duration-500 hover:scale-105" key={i}>
               <MediaItem
                 key={item.id}
                 id={item.id}

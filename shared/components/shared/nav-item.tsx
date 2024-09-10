@@ -8,25 +8,27 @@ interface Props {
   text: string;
   href: string;
   onClick?: () => void;
+  active?: boolean;
+  childStyles?: string;
   className?: string;
 }
 
-export const NavItem: React.FC<Props> = ({ text, href, onClick, className }) => {
+export const NavItem: React.FC<Props> = ({
+  text,
+  href,
+  onClick,
+  active = false,
+  childStyles,
+  className,
+}) => {
   const pathname = usePathname();
   return (
-    <Link
-      onClick={onClick}
-      href={href}
-      className={cn(
-        'block relative ',
-        pathname === href &&
-          'after:absolute after:w-full after:h-2 after:bg-gradient-to-b after:from-transparent after:via-purple-500 after:to-white after:opacity-1 after:transition-opacity after:duration-300 after:-bottom-3 after:left-0 after:right-0 after:scale-x-100 after:scale-y-100',
-        className,
-      )}>
+    <Link onClick={onClick} href={href} className={cn('block relative ', className)}>
       <span
         className={cn(
-          `text-[16px] transition-all block text-white/60 hover:text-white`,
-          pathname === href && 'text-white',
+          `text-[16px] block w-full z-50`,
+          active && pathname === href && 'active-page',
+          childStyles,
         )}>
         {text}
       </span>

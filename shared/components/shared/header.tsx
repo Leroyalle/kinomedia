@@ -4,11 +4,12 @@ import { Container } from './container';
 import { cn } from '@/shared/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import { NavBar } from './nav-bar';
+import { Navigation } from './navigation';
 import { ProfileButton } from './profile-button';
 import { SearchInput } from './search-input';
 import { useScrollPage } from '@/shared/hooks';
-
+import { navigationData } from '@/shared/constants';
+import { Logo } from './logo';
 interface Props {
   className?: string;
 }
@@ -25,17 +26,12 @@ export const Header: React.FC<Props> = ({ className }) => {
         )}>
         <Container className="flex justify-between items-center py-5 bg-black">
           <div className="flex items-center gap-24">
-            <Link href="/">
-              <div className="flex items-center gap-3">
-                <Image
-                  src="https://tvoe.live/img/full-logo.svg"
-                  width={125}
-                  height={30}
-                  alt="Logo"
-                />
-              </div>
-            </Link>
-            <NavBar />
+            <Logo />
+            <Navigation
+              items={navigationData.head}
+              active={true}
+              childStyles="text-white/70 hover:text-white transition"
+            />
           </div>
           <div className="flex items-center gap-8">
             <SearchInput />
