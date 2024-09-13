@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { useMoviesStore } from '@/shared/store/movies';
 import { MediaDTO } from '@/@types/mediaDTO';
@@ -18,9 +17,10 @@ export const useMedia = (isSeries: boolean): ReturnProps => {
 
   const nameParam = name === '' ? '' : `&genres.name=${name}`;
   const limit = `&limit=250`;
+  const rating = '&rating.kp=6-10';
   const isSeriesParams = isSeries
-    ? `&notNullFields=seriesLength&isSeries=true${limit}`
-    : `&notNullFields=movieLength&isSeries=false${limit}`;
+    ? `&notNullFields=seriesLength&isSeries=true${limit}${rating}`
+    : `&notNullFields=movieLength&isSeries=false${limit}${rating}`;
   React.useEffect(() => {
     if (isMounted.current) {
       mediaStore.fetchMedia(`${nameParam}${isSeriesParams}`);

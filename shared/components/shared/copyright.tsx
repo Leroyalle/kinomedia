@@ -11,7 +11,7 @@ export const Copyright: React.FC<Props> = ({ className }) => {
     <div className={cn('flex flex-wrap gap-3 items-center', className)}>
       <Clapperboard size={30} />
       <div className="flex flex-col">
-        <span className="text-white/70">2024, ООО "Kinomedia"</span>
+        <span className="text-white/70">2024, ООО Kinomedia</span>
         <span className="text-white/70">Все права защищены.</span>
       </div>
     </div>

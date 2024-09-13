@@ -1,3 +1,9 @@
+import { Container, MainBannerWrapper } from '@/shared/components/shared';
+
 export default function Home() {
-  return <main></main>;
+  return (
+    <Container>
+      <MainBannerWrapper />
+    </Container>
+  );
 }

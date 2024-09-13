@@ -2,8 +2,6 @@
 import React from 'react';
 import { Container } from './container';
 import { cn } from '@/shared/lib/utils';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Navigation } from './navigation';
 import { ProfileButton } from './profile-button';
 import { SearchInput } from './search-input';

@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
-import { Title } from '../title';
 import { MediaPageDescription } from './content/media-page-description';
 import { MediaItem } from '@/@types/media-item';
 import { Actors, Info, Titles } from './info';

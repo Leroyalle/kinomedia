@@ -1,4 +1,3 @@
-export { MediaPageBackdrop as Backdrop } from './media-page-backdrop';
 export { MediaPageContent as Content } from './media-page-content';
 export { MediaPageInfoBlock as InfoBlock } from './media-page-info-block';
 export { MediaPageCreators as Creators } from './media-page-creators';

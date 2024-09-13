@@ -35,7 +35,7 @@ export const MediaGroupSlider: React.FC<Props> = ({
   return (
     <div className={cn('flex flex-col justify-center gap-4', className)}>
       {title && <Title size="lg" text={title} />}
-      <div className="">
+      <div>
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           navigation

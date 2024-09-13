@@ -6,7 +6,7 @@ interface Props {
   className?: string;
 }
 
-export const MediaPageBackdrop: React.FC<Props> = ({ imageUrl, className }) => {
+export const Backdrop: React.FC<Props> = ({ imageUrl, className }) => {
   return (
     <div
       className={cn(className)}

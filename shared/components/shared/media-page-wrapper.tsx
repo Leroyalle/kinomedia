@@ -1,9 +1,10 @@
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { MediaItem } from '@/@types/media-item';
-import { Backdrop, Content, Creators, InfoBlock, SimilarMovies } from './media-page';
+import { Content, Creators, InfoBlock, SimilarMovies } from './media-page';
 import { BackButton } from './back-button';
 import { Title } from './title';
+import { Backdrop } from './backdrop';
 
 interface Props {
   item: MediaItem;

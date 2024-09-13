@@ -3,3 +3,4 @@ export { useMedia } from './use-media';
 export { useMediaItem } from './use-media-item';
 export { useScrollPage } from './use-scroll-page';
 export { useFetchSimilarMovies } from './use-fetch-similar-movies';
+export { useMediaByParams } from './use-media-by-params';
