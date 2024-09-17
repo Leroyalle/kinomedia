@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMoviesStore } from '@/shared/store/movies';
 import { MediaDTO } from '@/@types/mediaDTO';
-import { useCategoryStore } from '@/shared/store';
+import { QueryFilters } from './use-filters';
 
 interface ReturnProps {
   items: MediaDTO;
@@ -10,26 +10,17 @@ interface ReturnProps {
   fetchMedia: (params: string) => void;
 }
 
-export const useMedia = (isSeries: boolean): ReturnProps => {
+export const useMedia = (params: QueryFilters, isSeries: boolean): ReturnProps => {
   const mediaStore = useMoviesStore((state) => state);
-  const [name, reset] = useCategoryStore((state) => [state.name, state.reset]);
-  const isMounted = React.useRef(false);
-
-  const nameParam = name === '' ? '' : `&genres.name=${name}`;
-  const limit = `&limit=250`;
+  const genre = params.genre ? `&genres.name=${params.genre}` : '';
+  const limit = `&limit=10`;
   const rating = '&rating.kp=6-10';
   const isSeriesParams = isSeries
     ? `&notNullFields=seriesLength&isSeries=true${limit}${rating}`
     : `&notNullFields=movieLength&isSeries=false${limit}${rating}`;
   React.useEffect(() => {
-    if (isMounted.current) {
-      mediaStore.fetchMedia(`${nameParam}${isSeriesParams}`);
-    } else {
-      reset();
-      mediaStore.fetchMedia(isSeriesParams);
-    }
-    isMounted.current = true;
-  }, [name]);
+    mediaStore.fetchMedia(`${genre}${isSeriesParams}`);
+  }, [params.genre]);
 
   return mediaStore;
 };

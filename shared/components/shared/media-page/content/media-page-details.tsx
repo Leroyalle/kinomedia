@@ -24,7 +24,7 @@ export const MediaPageDetails: React.FC<Props> = ({
   seriesLength,
   className,
 }) => {
-  const { hours, minutes } = movieLength ? countMovieLength(movieLength) : {};
+  const { hours, minutes } = movieLength ? countMovieLength(movieLength) : { hours: 0, minutes: 0 };
   const normalizeHours = hours ? hours + ' ч' : '';
   const normalizeMinutes = minutes ? minutes + ' мин' : '';
   return (

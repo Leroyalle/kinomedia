@@ -13,7 +13,7 @@ interface Props {
   className?: string;
 }
 
-export const MediaGroup: React.FC<Props> = ({ items, title, loading, limit = 20, className }) => {
+export const MediaGroup: React.FC<Props> = ({ items, title, loading, limit = 10, className }) => {
   if (!items || loading) {
     // TODO: при пустом массивен рендерить пикчу
     return <MediaItemsSkeleton limit={limit} />;

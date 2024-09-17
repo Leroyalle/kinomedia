@@ -7,15 +7,12 @@ interface State {
   name: string;
   setActiveId: (activeId: number) => void;
   setName: (name: string) => void;
-  reset: () => void;
 }
+
 export const useCategoryStore = create<State>()((set) => ({
   items: [],
   activeId: 0,
   name: '',
   setActiveId: (activeId: number) => set({ activeId }),
   setName: (name: string) => set({ name }),
-  reset: () => {
-    set({ activeId: 0, name: '' });
-  },
 }));
