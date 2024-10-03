@@ -1,5 +1,9 @@
 export interface MediaDTO {
   docs: MovieDTO[];
+  total: number;
+  limit: number;
+  page: number;
+  pages: number;
 }
 
 export interface MovieDTO {

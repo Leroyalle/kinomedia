@@ -1,13 +1,15 @@
 import React from 'react';
 import { Skeleton } from '../ui';
+import { cn } from '@/shared/lib/utils';
 
 interface Props {
   limit?: number;
+  className?: string;
 }
 
-export const MediaItemsSkeleton: React.FC<Props> = ({ limit = 20 }) => {
+export const MediaItemsSkeleton: React.FC<Props> = ({ limit = 20, className }) => {
   return (
-    <div className="flex items-center gap-10 flex-wrap w-fit justify-center">
+    <div className={cn('flex items-center gap-10 flex-wrap w-fit justify-center', className)}>
       {...Array(limit)
         .fill(0)
         .map((_, index) => (

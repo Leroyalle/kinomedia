@@ -21,9 +21,7 @@ export const MediaPageCreators: React.FC<Props> = ({ persons, className }) => {
       navigation
       slidesPerView={8}
       slidesPerGroup={7}
-      pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}>
+      pagination={{ clickable: true }}>
       {persons.map((person, i) => (
         <SwiperSlide className="transition hover:-translate-y-1" key={i}>
           <MediaPageCreatorsItem

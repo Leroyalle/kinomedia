@@ -8,12 +8,12 @@ import { Title } from './title';
 interface Props {
   title: string;
   items: CategoriesDTO[];
-  activeId: number;
-  onChange: (id: number, name: string) => void;
+  activeName: string;
+  onChange: (name: string) => void;
   className?: string;
 }
 
-export const Categories: React.FC<Props> = ({ title, items, activeId, onChange, className }) => {
+export const Categories: React.FC<Props> = ({ title, items, activeName, onChange, className }) => {
   if (!items) {
     return (
       <div className={cn('flex flex-col', className)}>
@@ -32,12 +32,11 @@ export const Categories: React.FC<Props> = ({ title, items, activeId, onChange, 
       <Title text={title} size="lg" className="w-fit" />
       <div className="flex items-center overflow-x-auto scrollbar gap-4 py-3">
         <Button
-          onClick={() => onChange(0, '')}
+          onClick={() => onChange('')}
           className={cn(
             'flex items-center transition-all duration-300 ease-in-out bg-gray-800 p-6 rounded-xl',
             'hover:opacity-80 text-lg',
-            activeId === 0 &&
-              'bg-[linear-gradient(90deg,#48078f,#004fd6)] opacity-100 transition-all',
+            !activeName && 'bg-[linear-gradient(90deg,#48078f,#004fd6)] opacity-100 transition-all',
           )}
           variant={'ghost'}>
           Все категории
@@ -46,11 +45,11 @@ export const Categories: React.FC<Props> = ({ title, items, activeId, onChange, 
           <Button
             key={i}
             variant={'ghost'}
-            onClick={() => onChange(i + 1, item.name)}
+            onClick={() => onChange(item.name)}
             className={cn(
               'flex items-center transition-all duration-300 ease-in-out bg-gray-800 p-6 rounded-xl',
               'hover:opacity-80 text-lg',
-              activeId === i + 1 &&
+              activeName === item.name &&
                 'bg-[linear-gradient(90deg,#48078f,#004fd6)] opacity-100 transition-all',
             )}>
             {item.name}

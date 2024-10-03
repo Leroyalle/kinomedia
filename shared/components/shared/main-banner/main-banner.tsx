@@ -12,12 +12,11 @@ import 'swiper/css/thumbs';
 
 interface Props {
   items: MovieDTO[];
-  loading: boolean;
   limit?: number;
   className?: string;
 }
 
-export const MainBanner: React.FC<Props> = ({ items, loading, limit = 5, className }) => {
+export const MainBanner: React.FC<Props> = ({ items, limit = 5, className }) => {
   const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperClass>();
 
   return (

@@ -41,9 +41,7 @@ export const MediaGroupSlider: React.FC<Props> = ({
           navigation
           slidesPerView={5}
           slidesPerGroup={4}
-          pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}>
+          pagination={{ clickable: true }}>
           {items.map((item, i) => (
             <SwiperSlide className="transition ease-in-out duration-500 hover:scale-105" key={i}>
               <MediaItem
