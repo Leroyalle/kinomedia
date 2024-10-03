@@ -9,7 +9,7 @@ interface Props {
 
 export const MediaItemImage: React.FC<Props> = ({ previewUrl, name, className }) => {
   return (
-    <img
+    <Image
       src={previewUrl}
       width={250}
       height={450}

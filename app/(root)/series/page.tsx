@@ -1,7 +1,7 @@
 import {
   Container,
   Description,
-  MediaCollectionsGroups,
+  SeriesCollectionsGroup,
   SortBar,
 } from '@/shared/components/shared';
 import React, { Suspense } from 'react';
@@ -16,10 +16,10 @@ export default async function Series({ searchParams }: { searchParams: QueryFilt
       <Description />
       <div className="mt-6 mb-14">
         <Suspense>
-          <SortBar key={1232} items={categories} isSeries={true} />
+          <SortBar items={categories} isSeries={true} />
         </Suspense>
       </div>
-      <MediaCollectionsGroups searchParams={searchParams} type={'series'} isSeries={true} />
+      <SeriesCollectionsGroup searchParams={searchParams} />
     </Container>
   );
 }

@@ -6,7 +6,7 @@ export default async function MediaPage({ params: { id } }: { params: { id: numb
   const data = await useMediaItem(id);
   return (
     <Container>
-      <MediaPlayer id={data.id} />
+      {/* <MediaPlayer id={data.id} /> */}
       <MediaPageWrapper item={data} />
     </Container>
   );

@@ -15,28 +15,26 @@ interface Props {
 export const Header: React.FC<Props> = ({ className }) => {
   const visible = useScrollPage();
   return (
-    <>
-      <header
-        className={cn(
-          'sticky top-0 z-50 transition-[250ms] ease-in-out duration-300',
-          !visible && '-top-28',
-          className,
-        )}>
-        <Container className="flex justify-between items-center py-5 bg-black">
-          <div className="flex items-center gap-24">
-            <Logo />
-            <Navigation
-              items={navigationData.head}
-              active={true}
-              childStyles="text-white/70 hover:text-white transition"
-            />
-          </div>
-          <div className="flex items-center gap-8">
-            <SearchInput />
-            <ProfileButton />
-          </div>
-        </Container>
-      </header>
-    </>
+    <header
+      className={cn(
+        'sticky top-0 z-50 transition-[250ms] ease-in-out duration-300',
+        !visible && '-top-28',
+        className,
+      )}>
+      <Container className="flex justify-between items-center py-5 bg-black">
+        <div className="flex items-center gap-24">
+          <Logo />
+          <Navigation
+            items={navigationData.head}
+            active={true}
+            childStyles="text-white/70 hover:text-white transition"
+          />
+        </div>
+        <div className="flex items-center gap-8">
+          <SearchInput />
+          <ProfileButton />
+        </div>
+      </Container>
+    </header>
   );
 };

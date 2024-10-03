@@ -1,9 +1,4 @@
-import {
-  Container,
-  Description,
-  MediaCollectionsGroups,
-  SortBar,
-} from '@/shared/components/shared';
+import { Container, Description, FilmsCollectionsGroup, SortBar } from '@/shared/components/shared';
 import React, { Suspense } from 'react';
 import { useFetchCategories } from '@/shared/hooks';
 import { QueryFilters } from '@/shared/hooks/use-filters';
@@ -19,7 +14,7 @@ export default async function Films({ searchParams }: { searchParams: QueryFilte
           <SortBar items={categories} isSeries={false} />
         </Suspense>
       </div>
-      <MediaCollectionsGroups searchParams={searchParams} type={'movie'} isSeries={false} />
+      <FilmsCollectionsGroup searchParams={searchParams} />
     </Container>
   );
 }
