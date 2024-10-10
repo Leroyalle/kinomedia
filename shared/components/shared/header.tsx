@@ -8,12 +8,14 @@ import { SearchInput } from './search-input';
 import { useScrollPage } from '@/shared/hooks';
 import { navigationData } from '@/shared/constants';
 import { Logo } from './logo';
+import { AuthModal } from './modals';
 interface Props {
   className?: string;
 }
 
 export const Header: React.FC<Props> = ({ className }) => {
   const visible = useScrollPage();
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   return (
     <header
       className={cn(
@@ -32,7 +34,8 @@ export const Header: React.FC<Props> = ({ className }) => {
         </div>
         <div className="flex items-center gap-8">
           <SearchInput />
-          <ProfileButton />
+          <ProfileButton onClickSignIn={() => setIsDialogOpen(true)} />
+          <AuthModal open={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
         </div>
       </Container>
     </header>

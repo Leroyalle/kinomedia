@@ -29,3 +29,5 @@ export { MainBannerWrapper } from './main-banner-wrapper';
 export { MediaPlayer } from './media-player';
 export { SeriesCollectionsGroup } from './series-collections-group';
 export { FilmsCollectionsGroup } from './films-collections-group';
+export { MediaGroupSliderWrapper } from './media-group-slider-wrapper';
+export { RandomMovie } from './random-movie';

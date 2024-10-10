@@ -3,15 +3,14 @@ import Link from 'next/link';
 import { Button } from '../ui';
 
 interface Props {
+  onClickSignIn: VoidFunction;
   className?: string;
 }
 
-export const ProfileButton: React.FC<Props> = ({ className }) => {
+export const ProfileButton: React.FC<Props> = ({ onClickSignIn, className }) => {
   return (
-    <Link href="/profile">
-      <Button className="text-md" variant={'link'}>
-        Войти
-      </Button>
-    </Link>
+    <Button onClick={onClickSignIn} className="text-md" variant={'link'}>
+      Войти
+    </Button>
   );
 };

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { Search, X } from 'lucide-react';
 import { Input } from '../ui';
@@ -17,6 +17,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [isFocused, setIsFocused] = React.useState(false);
   const [movies, setMovies] = React.useState<MovieDTO[]>([]);
   const limit = 5;
+
   useClickAway(ref, () => {
     setIsFocused(false);
   });
@@ -76,7 +77,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 <img
                   src={movie.poster.url ?? movie.poster.previewUrl}
                   alt={movie.name}
-                  className="rounded-sm h-8 w-8"
+                  className="rounded-sm h-8 w-8 object-cover"
                 />
                 <span>{movie.name}</span>
               </Link>

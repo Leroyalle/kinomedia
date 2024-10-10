@@ -7,5 +7,9 @@ interface Props {
 }
 
 export const MediaItemBadge: React.FC<Props> = ({ ratingKp, className }) => {
-  return <span className={cn('block', className)}>{ratingKp.toString().substring(0, 3)}</span>;
+  return (
+    <span className={cn('grid place-items-center', className)}>
+      {ratingKp.toString().substring(0, 3)}
+    </span>
+  );
 };

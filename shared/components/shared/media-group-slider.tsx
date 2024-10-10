@@ -4,7 +4,6 @@ import { cn } from '@/shared/lib/utils';
 import { Title } from './title';
 import { MediaItem } from './media-item';
 import { MovieDTO } from '@/@types/mediaDTO';
-import { MediaItemsSkeleton } from './media-items-skeleton';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -15,23 +14,10 @@ import { Navigation, Pagination, A11y } from 'swiper/modules';
 interface Props {
   items: MovieDTO[];
   title?: string;
-  loading: boolean;
-  limit?: number;
   className?: string;
 }
 
-export const MediaGroupSlider: React.FC<Props> = ({
-  items,
-  title,
-  loading,
-  limit = 20,
-  className,
-}) => {
-  if (!items || loading) {
-    // TODO: при пустом массивен рендерить пикчу
-    return <MediaItemsSkeleton limit={limit} />;
-  }
-
+export const MediaGroupSlider: React.FC<Props> = ({ items, title, className }) => {
   return (
     <div className={cn('flex flex-col justify-center gap-4', className)}>
       {title && <Title size="lg" text={title} />}

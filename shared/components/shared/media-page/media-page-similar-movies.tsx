@@ -2,13 +2,26 @@
 import React from 'react';
 import { MediaGroupSlider } from '../media-group-slider';
 import { useFetchSimilarMovies } from '@/shared/hooks';
+import { MediaItemsSkeleton } from '../media-items-skeleton';
 
 interface Props {
   id: number;
 }
 
 export const MediaPageSimilarMovies: React.FC<Props> = ({ id }) => {
-  const { items, loading } = useFetchSimilarMovies(id);
+  const { data, isLoading, isError } = useFetchSimilarMovies(id);
 
-  return <MediaGroupSlider title={'Похожие фильмы'} limit={5} items={items} loading={loading} />;
+  if (isLoading) {
+    return <MediaItemsSkeleton limit={5} />;
+  }
+
+  if (isError) {
+    return <h1>Error</h1>;
+  }
+
+  if (!data) {
+    return <h1>Not found</h1>;
+  }
+
+  return <MediaGroupSlider title={'Похожие фильмы'} items={data} />;
 };
