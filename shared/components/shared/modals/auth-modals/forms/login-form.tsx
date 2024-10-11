@@ -5,12 +5,15 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { loginFormSchema, TLoginFormSchema } from './schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/shared/components/ui';
+import { signIn } from 'next-auth/react';
+import toast from 'react-hot-toast';
 
 interface Props {
+  onClose: VoidFunction;
   className?: string;
 }
 
-export const LoginForm: React.FC<Props> = ({ className }) => {
+export const LoginForm: React.FC<Props> = ({ onClose, className }) => {
   const form = useForm<TLoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -19,7 +22,27 @@ export const LoginForm: React.FC<Props> = ({ className }) => {
     },
   });
   const onSubmit = async (data: TLoginFormSchema) => {
-    console.log(data);
+    try {
+      const resp = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
+
+      if (!resp?.ok) {
+        throw Error();
+      }
+
+      onClose();
+
+      toast.success('Вы успешно вошли в аккаунт', {
+        icon: '✅',
+      });
+    } catch (error) {
+      console.error('Error [LOGIN]', error);
+      toast.error('Не удалось войти в аккаунт', {
+        icon: '❌',
+      });
+    }
   };
 
   return (

@@ -30,8 +30,8 @@ export const MainBanner: React.FC<Props> = ({ items, limit = 5, className }) => 
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className={className}>
-        {items.map((item, i) => (
-          <SwiperSlide className="relative rounded-xl w-full h-full" key={i}>
+        {items.map((item) => (
+          <SwiperSlide className="relative rounded-xl w-full h-full" key={item.id}>
             <div className="relative h-full w-full">
               <div className="pb-[32%]" />
               <MainBannerItem
@@ -56,19 +56,17 @@ export const MainBanner: React.FC<Props> = ({ items, limit = 5, className }) => 
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="bottom-gallery">
-        {items.map((item, i) => (
-          <>
-            <SwiperSlide key={i}>
-              <img
-                src={item.backdrop.url}
-                alt={item.name}
-                width={200}
-                height={100}
-                className="rounded-xl"
-              />
-              {/* TODO: добавить прогрессбар */}
-            </SwiperSlide>
-          </>
+        {items.map((item) => (
+          <SwiperSlide key={item.id}>
+            <img
+              src={item.backdrop.url}
+              alt={item.name}
+              width={200}
+              height={100}
+              className="rounded-xl"
+            />
+            {/* TODO: добавить прогрессбар */}
+          </SwiperSlide>
         ))}
       </Swiper>
     </>

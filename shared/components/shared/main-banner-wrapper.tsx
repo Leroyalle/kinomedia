@@ -6,7 +6,7 @@ import { MainBannerSkeleton } from './main-banner-skeleton';
 
 export const MainBannerWrapper: React.FC = () => {
   const { data, isLoading, isError } = useFetchMediaByParams(
-    `&rating.kp=8-10&year=2024&limit=20&notNullFields=backdrop.url`,
+    `&rating.kp=7-10&year=2024&limit=20&notNullFields=backdrop.url&genres.name=!аниме&genres.name=!мультфильм`,
   );
 
   if (isLoading) {
@@ -17,7 +17,7 @@ export const MainBannerWrapper: React.FC = () => {
     return <h1>Error fetching</h1>;
   }
 
-  if (!data) {
+  if (!data || data.length === 0) {
     return <h1>Not found</h1>;
   }
 

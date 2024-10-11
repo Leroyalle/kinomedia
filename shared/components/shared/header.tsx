@@ -9,6 +9,9 @@ import { useScrollPage } from '@/shared/hooks';
 import { navigationData } from '@/shared/constants';
 import { Logo } from './logo';
 import { AuthModal } from './modals';
+import { signOut, useSession } from 'next-auth/react';
+import { Button } from '../ui/button';
+import { redirect } from 'next/dist/server/api-utils';
 interface Props {
   className?: string;
 }
@@ -16,6 +19,7 @@ interface Props {
 export const Header: React.FC<Props> = ({ className }) => {
   const visible = useScrollPage();
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const { data: session } = useSession();
   return (
     <header
       className={cn(
@@ -35,6 +39,7 @@ export const Header: React.FC<Props> = ({ className }) => {
         <div className="flex items-center gap-8">
           <SearchInput />
           <ProfileButton onClickSignIn={() => setIsDialogOpen(true)} />
+
           <AuthModal open={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
         </div>
       </Container>

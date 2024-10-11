@@ -23,7 +23,6 @@ export const FormInput: React.FC<Props> = ({ label, name, className, ...props })
 
   return (
     <div className={cn('flex justify-center flex-col gap-2', className)}>
-      {/* {name && <p className="text-white">{name}</p>} */}
       {label && <p className="font-medium mb-2">{label}</p>}
       <div className="text-black relative">
         <Input className="h-12 text-md pr-12" {...register(name)} {...props} />
