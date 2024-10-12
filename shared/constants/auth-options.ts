@@ -1,6 +1,6 @@
 import { prisma } from '@/prisma/prisma-client';
 import { compare, hashSync } from 'bcrypt';
-import { Account, AuthOptions, Session, SessionStrategy, User } from 'next-auth';
+import { Account, AuthOptions, Session, User } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -48,10 +48,9 @@ export const authOptions: AuthOptions = {
         if (!isPasswordValid) {
           return null;
         }
-
         return {
           id: findUser.id,
-          fullName: findUser.fullName,
+          name: findUser.fullName,
           email: findUser.email,
         };
       },
@@ -59,7 +58,7 @@ export const authOptions: AuthOptions = {
   ],
   secret: process.env.NEXT_AUTH_SECRET,
   session: {
-    strategy: 'jwt' as SessionStrategy,
+    strategy: 'jwt',
   },
   callbacks: {
     async signIn({ user, account }: { user: User | AdapterUser; account: Account | null }) {

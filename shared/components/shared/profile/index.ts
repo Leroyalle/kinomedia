@@ -1,1 +1,1 @@
-export { DarkBlock } from './dark-block';
+export { ProfileBlocksWrapper } from './profile-blocks-wrapper';

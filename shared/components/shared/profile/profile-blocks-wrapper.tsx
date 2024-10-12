@@ -1,0 +1,61 @@
+'use client';
+import React from 'react';
+import { cn } from '@/shared/lib/utils';
+import { PersonalData } from './blocks';
+import { Avatar, Id } from './personal-data-ui';
+import { Copy } from 'lucide-react';
+import Link from 'next/link';
+import { profileActionsData } from '@/shared/constants';
+import { DarkBlock } from './blocks/dark-block';
+
+interface Props {
+  id: number;
+  email: string;
+  fullName?: string;
+  image?: string;
+  className?: string;
+}
+
+export const ProfileBlocksWrapper: React.FC<Props> = ({
+  id,
+  email,
+  fullName,
+  image,
+  className,
+}) => {
+  return (
+    <section className={cn('w-full px-20 py-16', className)}>
+      <div className="flex justify-between mb-4">
+        <PersonalData
+          className="w-[67%] mr-4"
+          title={'Личные данные'}
+          endAdornment={<Id id={id} />}
+          email={email}
+          image={image}
+        />
+        {profileActionsData.slice(0, 1).map((action, i) => (
+          <DarkBlock
+            title={action.name}
+            key={i}
+            href={action.href}
+            action={action.action}
+            icon={<action.icon size={100} className="text-gray" />}
+            className="rounded-3xl w-[33%] text-[#636363]"
+          />
+        ))}
+      </div>
+      <div className="flex justify-between gap-x-4">
+        {profileActionsData.slice(1).map((action, i) => (
+          <DarkBlock
+            title={action.name}
+            key={i}
+            href={action.href}
+            action={action.action}
+            icon={<action.icon size={100} />}
+            className="rounded-3xl w-[33%] text-[#636363]"
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
