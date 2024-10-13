@@ -14,10 +14,11 @@ interface Props {
 
 export const PersonalData: React.FC<Props> = ({ title, image, email, endAdornment, className }) => {
   return (
-    <article className={cn('flex flex-col p-6 bg-[hsla(0,0%,100%,.1)] rounded-3xl', className)}>
+    <article
+      className={cn('flex flex-col p-6 bg-[hsla(0,0%,100%,.1)] rounded-3xl h-[205px]', className)}>
       {title && (
         <header className="flex items-center justify-between mb-6">
-          <Title text={title} size="lg" />
+          <Title text={title} size="md" />
           {endAdornment}
         </header>
       )}
@@ -26,7 +27,9 @@ export const PersonalData: React.FC<Props> = ({ title, image, email, endAdornmen
         <Avatar imageUrl={image} />
         <div className="flex flex-col gap-y-2">
           <span className="text-lg">{email}</span>
-          <Link href={'/profile/edit'} className="text-[#636363] transition-all hover:text-white">
+          <Link
+            href={'/profile/edit'}
+            className="text-[#636363] transition-all hover:text-white w-fit">
             Редактировать
           </Link>
         </div>

@@ -25,7 +25,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
             className="gap-2 h-12 p-2 flex-1"
             onClick={() =>
               signIn('github', {
-                callbackUrl: '/',
+                callbackUrl: '/profile',
                 redirect: true,
               })
             }>

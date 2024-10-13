@@ -1,10 +1,7 @@
-'use client';
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { PersonalData } from './blocks';
-import { Avatar, Id } from './personal-data-ui';
-import { Copy } from 'lucide-react';
-import Link from 'next/link';
+import { Id } from './personal-data-ui';
 import { profileActionsData } from '@/shared/constants';
 import { DarkBlock } from './blocks/dark-block';
 
@@ -24,7 +21,7 @@ export const ProfileBlocksWrapper: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <section className={cn('w-full px-20 py-16', className)}>
+    <section className={cn('w-full', className)}>
       <div className="flex justify-between mb-4">
         <PersonalData
           className="w-[67%] mr-4"

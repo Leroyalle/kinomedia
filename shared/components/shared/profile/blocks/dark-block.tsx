@@ -16,12 +16,12 @@ export const DarkBlock: React.FC<Props> = ({ title, href, action, icon, classNam
     <Link
       href={href}
       className={cn(
-        'flex flex-col p-6 bg-[hsla(0,0%,100%,.1)] transition-all hover:bg-[hsla(0,0%,100%,.2)]',
+        'flex flex-col p-6 bg-[hsla(0,0%,100%,.1)] h-[205px] transition-all hover:bg-[hsla(0,0%,100%,.2)]',
         className,
       )}>
       {title && (
         <header className="flex items-center justify-between">
-          <Title text={title} size="lg" className="text-white" />
+          <Title text={title} size="md" className="text-white" />
         </header>
       )}
 

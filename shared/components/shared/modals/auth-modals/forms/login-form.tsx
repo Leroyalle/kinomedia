@@ -25,7 +25,8 @@ export const LoginForm: React.FC<Props> = ({ onClose, className }) => {
     try {
       const resp = await signIn('credentials', {
         ...data,
-        redirect: false,
+        redirect: true,
+        callbackUrl: '/profile',
       });
 
       if (!resp?.ok) {
