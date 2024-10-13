@@ -23,7 +23,7 @@ export const Header: React.FC<Props> = ({ className }) => {
         !visible && '-top-28',
         className,
       )}>
-      <Container className="flex justify-between items-center py-5 bg-black">
+      <Container className="flex justify-between items-center py-5 bg-black max-w-full px-8">
         <div className="flex items-center gap-24">
           <Logo />
           <Navigation

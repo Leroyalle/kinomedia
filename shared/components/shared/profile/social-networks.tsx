@@ -1,6 +1,5 @@
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
-import { Title } from '../title';
 import { ContactsBlock } from '../contacts-block';
 import { contacts } from '@/shared/constants';
 import { Head, Image } from './social-networks-ui';
