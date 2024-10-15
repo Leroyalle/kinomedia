@@ -11,7 +11,14 @@ interface Props {
 
 export const SignOutButton: React.FC<Props> = ({ className }) => {
   return (
-    <Button className={cn('flex gap-x-2', className)} variant="ghost" onClick={() => signOut()}>
+    <Button
+      className={cn('flex gap-x-2', className)}
+      variant="ghost"
+      onClick={() =>
+        signOut({
+          callbackUrl: '/',
+        })
+      }>
       <LogOut /> <span>Выйти из профиля</span>
     </Button>
   );

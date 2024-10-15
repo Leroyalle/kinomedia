@@ -13,6 +13,7 @@ model User {
   fullName String
   email    String
   password String
+  image    String?
 
   provider   String?
   providerId String?

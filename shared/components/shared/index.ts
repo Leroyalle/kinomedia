@@ -34,3 +34,5 @@ export { RandomMovie } from './random-movie';
 export { ProfileBlocksWrapper } from './profile';
 export { SignOutButton } from './profile';
 export { SocialNetworks } from './profile';
+export { EditBlock } from './edit';
+export { InfoBlock } from './info-block';

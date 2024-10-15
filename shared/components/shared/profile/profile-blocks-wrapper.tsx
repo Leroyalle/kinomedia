@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { PersonalData } from './blocks';
-import { Id } from './personal-data-ui';
+import { UserId } from '../user';
 import { profileActionsData } from '@/shared/constants';
 import { DarkBlock } from './blocks/dark-block';
 
@@ -9,7 +9,7 @@ interface Props {
   id: number;
   email: string;
   fullName?: string;
-  image?: string;
+  image?: string | null;
   className?: string;
 }
 
@@ -26,7 +26,7 @@ export const ProfileBlocksWrapper: React.FC<Props> = ({
         <PersonalData
           className="w-[67%] mr-4"
           title={'Личные данные'}
-          endAdornment={<Id id={id} />}
+          endAdornment={<UserId id={id} />}
           email={email}
           image={image}
         />

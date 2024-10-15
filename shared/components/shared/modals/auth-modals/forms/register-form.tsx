@@ -46,7 +46,7 @@ export const RegisterForm: React.FC<Props> = ({ onClose, className }) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('flex flex-col gap-4', className)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('flex flex-col gap-5', className)}>
         <FormInput label={'Имя'} name={'fullName'} />
         <FormInput label={'Почта'} name={'email'} />
         <FormInput label={'Пароль'} name={'password'} type="password" />
@@ -54,7 +54,7 @@ export const RegisterForm: React.FC<Props> = ({ onClose, className }) => {
         <Button
           variant={'secondary'}
           loading={form.formState.isSubmitting}
-          className="h-12 text-base"
+          className="h-12 text-base mt-2"
           type="submit">
           Зарегестрироваться
         </Button>
