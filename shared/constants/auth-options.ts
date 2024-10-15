@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       try {
         if (account?.provider === 'credentials') {
           return true;
@@ -68,6 +68,8 @@ export const authOptions: AuthOptions = {
         if (!user.email) {
           return false;
         }
+
+        console.log(profile);
 
         const findUser = await prisma.user.findFirst({
           where: {
@@ -84,6 +86,7 @@ export const authOptions: AuthOptions = {
               id: findUser.id,
             },
             data: {
+              image: profile?.image || user.image,
               provider: account?.provider,
               providerId: account?.providerAccountId,
             },
@@ -97,7 +100,7 @@ export const authOptions: AuthOptions = {
               email: user.email,
               fullName: user.name || 'User #' + user.id,
               password: hashSync(user.id.toString(), 10),
-              image: user.image,
+              image: profile?.image,
               provider: account?.provider,
               providerId: account?.providerAccountId,
             },
@@ -110,8 +113,6 @@ export const authOptions: AuthOptions = {
         return false;
       }
     },
-
-    // FIXME: гитхаб багается если удалить или редактировать профиль, возхвращает старые данные которые уже удалены
 
     async jwt({ token }) {
       if (!token.email) {

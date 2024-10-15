@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 import { Button } from '@/shared/components/ui';
 
 interface Props {
-  imageUrl?: string;
+  imageUrl?: string | null;
   className?: string;
 }
 

@@ -3,7 +3,7 @@ import { cn } from '@/shared/lib/utils';
 import { UserRound } from 'lucide-react';
 
 interface Props {
-  imageUrl?: string;
+  imageUrl?: string | null;
   className?: string;
 }
 

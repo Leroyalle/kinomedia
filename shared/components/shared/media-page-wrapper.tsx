@@ -18,7 +18,7 @@ export const MediaPageWrapper: React.FC<Props> = ({ item, className }) => {
         className={cn(`relative flex justify-between items-top h-full backdrop-shadow`, className)}>
         <div className="pb-[45%] block" />
         <Backdrop imageUrl={item.backdrop?.url} className="absolute w-full h-full inset-0 -z-10" />
-        <BackButton className="absolute top-4 left-0" />
+        <BackButton className="absolute top-4 left-0 pl-0 text-white text-md" />
         <div className="absolute w-full h-full flex items-center top-0 left-0">
           <Content item={item} className="" />
         </div>

@@ -80,7 +80,11 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className 
           />
         </div>
 
-        <Button loading={form.formState.isSubmitting} variant={'secondary'} type="submit">
+        <Button
+          loading={form.formState.isSubmitting}
+          variant={'secondary'}
+          type="submit"
+          className="max-w-32">
           Сохранить
         </Button>
       </form>

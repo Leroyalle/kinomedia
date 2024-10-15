@@ -10,6 +10,7 @@ export default async function EditProfilePage() {
     redirect('/not-auth');
   }
 
+  //FIXME: не возвращать пароль
   const user = await prisma.user.findFirst({
     where: {
       id: Number(session.user.id),
@@ -22,7 +23,7 @@ export default async function EditProfilePage() {
 
   return (
     <Container className="px-20 py-16">
-      <BackButton className="pl-0" />
+      <BackButton className="pl-0 text-md mb-8 text-white" />
       <EditBlock
         id={Number(user.id)}
         fullName={user.fullName || ''}

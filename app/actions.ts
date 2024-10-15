@@ -63,3 +63,32 @@ export async function updateUser(body: Prisma.UserUpdateInput) {
     throw error;
   }
 }
+
+export async function deleteUser() {
+  try {
+    const currentUser = await getUserSession();
+
+    if (!currentUser) {
+      return null;
+    }
+
+    const findUser = await prisma.user.findFirst({
+      where: {
+        id: Number(currentUser.id),
+      },
+    });
+
+    if (!findUser) {
+      return null;
+    }
+
+    await prisma.user.delete({
+      where: {
+        id: findUser.id,
+      },
+    });
+  } catch (error) {
+    console.log('Error [DELETE_USER]', error);
+    throw error;
+  }
+}
