@@ -19,7 +19,8 @@ export const SignOutButton: React.FC<Props> = ({ className }) => {
           callbackUrl: '/',
         })
       }>
-      <LogOut /> <span>Выйти из профиля</span>
+      <LogOut />
+      <span>Выйти из профиля</span>
     </Button>
   );
 };
