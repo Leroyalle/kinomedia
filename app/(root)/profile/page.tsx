@@ -16,6 +16,12 @@ export default async function ProfilePage() {
     where: {
       id: Number(session.user.id),
     },
+    select: {
+      id: true,
+      fullName: true,
+      email: true,
+      image: true,
+    },
   });
 
   if (!user) {

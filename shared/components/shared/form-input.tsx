@@ -2,16 +2,24 @@ import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { Input } from '../ui';
 import { useFormContext } from 'react-hook-form';
-import { X } from 'lucide-react';
+import { Loader, X } from 'lucide-react';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
+  loading?: boolean;
   inputStyles?: string;
   className?: string;
 }
 
-export const FormInput: React.FC<Props> = ({ label, name, inputStyles, className, ...props }) => {
+export const FormInput: React.FC<Props> = ({
+  label,
+  name,
+  loading,
+  inputStyles,
+  className,
+  ...props
+}) => {
   const {
     register,
     formState: { errors },
@@ -27,12 +35,22 @@ export const FormInput: React.FC<Props> = ({ label, name, inputStyles, className
       {label && <p className="font-medium ">{label}</p>}
       <div className="relative">
         <div className="relative">
-          <Input className={cn('h-12 text-md pr-12', inputStyles)} {...register(name)} {...props} />
+          <Input
+            className={cn('h-12 text-md pr-12', inputStyles)}
+            {...register(name)}
+            {...props}
+            disabled={loading}
+          />
           {value && (
             <X
               className="absolute right-4 top-1/2 -translate-y-1/2 opacity-30 hover:opacity-100 cursor-pointer"
               onClick={() => setValue(name, '', { shouldValidate: true })}
             />
+          )}
+          {loading && (
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+              <Loader className="animate-spin" />
+            </div>
           )}
         </div>
         {errorText && <p className="absolute text-red-500">{errorText}</p>}

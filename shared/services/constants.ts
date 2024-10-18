@@ -3,4 +3,7 @@ export enum ApiRouter {
   MOVIES = '/movie',
   SEARCH = '/movie/search',
   RANDOM = '/movie/random',
+  USER = '/user',
+  // FIXME: user/avatar
+  AVATAR = '/user/avatar',
 }

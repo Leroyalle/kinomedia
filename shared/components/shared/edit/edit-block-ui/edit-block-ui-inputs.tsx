@@ -12,10 +12,11 @@ import { updateUser } from '@/app/actions';
 interface Props {
   fullName: string;
   email: string;
+  loading: boolean;
   className?: string;
 }
 
-export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className }) => {
+export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, loading, className }) => {
   const form = useForm<TRegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -25,6 +26,11 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className 
       confirmPassword: '',
     },
   });
+
+  React.useEffect(() => {
+    form.setValue('fullName', fullName);
+    form.setValue('email', email);
+  }, [fullName, email]);
 
   const onSubmit = async (data: TRegisterFormSchema) => {
     try {
@@ -56,6 +62,7 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className 
             autoComplete="off"
             className="text-white"
             placeholder="Имя"
+            loading={loading}
           />
           <FormInput
             name={'email'}
@@ -63,6 +70,7 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className 
             autoComplete="off"
             className="text-white"
             placeholder="Почта"
+            loading={loading}
           />
           <FormInput
             name={'password'}
@@ -70,6 +78,7 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className 
             autoComplete="off"
             className="text-white"
             placeholder="Новый пароль"
+            loading={loading}
           />
           <FormInput
             name={'confirmPassword'}
@@ -77,6 +86,7 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, className 
             autoComplete="off"
             className="text-white"
             placeholder="Подтвердите пароль"
+            loading={loading}
           />
         </div>
 

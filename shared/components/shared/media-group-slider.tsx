@@ -25,7 +25,7 @@ export const MediaGroupSlider: React.FC<Props> = ({ items, title, className }) =
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           navigation
-          slidesPerView={5}
+          slidesPerView={5.2}
           slidesPerGroup={4}
           pagination={{ clickable: true }}>
           {items.map((item, i) => (

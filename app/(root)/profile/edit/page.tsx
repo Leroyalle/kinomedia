@@ -1,35 +1,26 @@
 import { prisma } from '@/prisma/prisma-client';
-import { BackButton, Container, EditBlock } from '@/shared/components/shared';
-import { authOptions } from '@/shared/constants/auth-options';
-import { getServerSession } from 'next-auth';
+import { Container, EditPageWrapper } from '@/shared/components/shared';
+import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
+import React from 'react';
 
 export default async function EditProfilePage() {
-  const session = await getServerSession(authOptions);
+  const session = await getUserSession();
   if (!session) {
     redirect('/not-auth');
   }
 
-  //FIXME: не возвращать пароль
   const user = await prisma.user.findFirst({
-    where: {
-      id: Number(session.user.id),
-    },
+    where: { id: Number(session.id) },
   });
 
   if (!user) {
-    return redirect('/not-auth');
+    redirect('/not-auth');
   }
 
   return (
     <Container className="px-20 py-16">
-      <BackButton className="pl-0 text-md mb-8 text-white" />
-      <EditBlock
-        id={Number(user.id)}
-        fullName={user.fullName || ''}
-        email={user.email}
-        imageUrl={user.image}
-      />
+      <EditPageWrapper sessionId={Number(session.id)} />
     </Container>
   );
 }

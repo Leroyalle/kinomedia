@@ -14,7 +14,11 @@ export const UserAvatar: React.FC<Props> = ({ imageUrl, className }) => {
         'rounded-[50%] bg-[hsla(0,0%,100%,.1)] overflow-hidden grid place-items-center',
         className,
       )}>
-      {imageUrl ? <img src={imageUrl} className="w-full object-cover" /> : <UserRound size={50} />}
+      {imageUrl ? (
+        <img src={imageUrl} className="w-full object-cover h-full" />
+      ) : (
+        <UserRound size={50} />
+      )}
     </div>
   );
 };

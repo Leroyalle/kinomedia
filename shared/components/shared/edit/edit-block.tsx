@@ -1,5 +1,4 @@
 import React from 'react';
-import { cn } from '@/shared/lib/utils';
 import { TitleAndId as Head, UserId } from '../user';
 import { DeleteUserButton, EditBlockUiAvatar, EditBlockUiInputs } from './edit-block-ui';
 
@@ -8,16 +7,25 @@ interface Props {
   fullName: string;
   email: string;
   imageUrl?: string | null;
+  loading: boolean;
   className?: string;
 }
 
-export const EditBlock: React.FC<Props> = ({ id, fullName, email, imageUrl, className }) => {
+export const EditBlock: React.FC<Props> = ({
+  id,
+  fullName,
+  email,
+  imageUrl,
+  loading,
+  className,
+}) => {
   return (
-    <section className={cn('', className)}>
+    <section className={className}>
       <Head title={'Личные данные'} endAdornment={<UserId id={id} />} className="mb-4" />
-      <EditBlockUiAvatar className="mb-4" imageUrl={imageUrl} />
-      <EditBlockUiInputs fullName={fullName} email={email} />
-      <DeleteUserButton className="mt-10" />
+      <EditBlockUiAvatar className="mb-4" sessionId={id} imageUrl={imageUrl} loading={loading} />
+      <EditBlockUiInputs fullName={fullName} email={email} loading={loading} />
+      <hr className="bg-white w-full my-10" />
+      <DeleteUserButton />
     </section>
   );
 };

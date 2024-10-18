@@ -92,3 +92,30 @@ export async function deleteUser() {
     throw error;
   }
 }
+
+export async function resetAvatar() {
+  const currentUser = await getUserSession();
+
+  if (!currentUser) {
+    return null;
+  }
+
+  const findUser = await prisma.user.findFirst({
+    where: {
+      id: Number(currentUser.id),
+    },
+  });
+
+  if (!findUser) {
+    return null;
+  }
+
+  await prisma.user.update({
+    where: {
+      id: findUser.id,
+    },
+    data: {
+      image: null,
+    },
+  });
+}

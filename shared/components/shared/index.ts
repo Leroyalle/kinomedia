@@ -36,3 +36,4 @@ export { SignOutButton } from './profile';
 export { SocialNetworks } from './profile';
 export { EditBlock } from './edit';
 export { InfoBlock } from './info-block';
+export { EditPageWrapper } from './edit';
