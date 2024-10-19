@@ -7,8 +7,8 @@ import { redirect } from 'next/navigation';
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
-
-  if (!session) {
+  // FIXME: если обновить данные на странице edit, а после вернуться назад на страницу profile, данные останутся прежними, пока не перезагружена страница (сделать клиентом)
+  if (!session?.user.id) {
     redirect('/not-auth');
   }
 
