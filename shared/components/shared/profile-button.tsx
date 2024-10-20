@@ -10,10 +10,14 @@ interface Props {
 }
 
 export const ProfileButton: React.FC<Props> = ({ onClickSignIn, className }) => {
-  const session = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <Button className="w-[120px]" loading />;
+  }
   return (
     <>
-      {!session.data?.user ? (
+      {!session ? (
         <Button onClick={onClickSignIn} className="text-md" variant={'link'}>
           Войти
         </Button>

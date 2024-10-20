@@ -3,7 +3,6 @@ import { compare, hashSync } from 'bcrypt';
 import { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
-import { getSession } from 'next-auth/react';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -61,7 +60,6 @@ export const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    // FIXME: если создать аккаунт, авторизоваться через github, поменять email, выйти из из аккаунта и попытаться снова авторизоваться через github - дропается ошибка (сессия не возвращает айди)
     async signIn({ user, account, profile }) {
       try {
         if (account?.provider === 'credentials') {
@@ -134,7 +132,7 @@ export const authOptions: AuthOptions = {
         },
       });
       if (findUser) {
-        token.id = String(findUser?.id);
+        token.id = String(findUser.id);
       }
 
       return token;

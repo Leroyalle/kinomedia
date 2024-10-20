@@ -66,6 +66,12 @@
   body {
     @apply bg-[#09090c] text-white;
   }
+  @font-face {
+    font-family: 'Druk Wide';
+    src: url(/fonts/DrukWide-Super-Trial.otf);
+    font-weight: 400;
+    font-display: swap;
+  }
 }
 
 .scrollbar::-webkit-scrollbar {

@@ -9,6 +9,7 @@ import { useScrollPage } from '@/shared/hooks';
 import { navigationData } from '@/shared/constants';
 import { Logo } from './logo';
 import { AuthModal } from './modals';
+import { PaymentButton } from './payment-button';
 interface Props {
   className?: string;
 }
@@ -34,8 +35,8 @@ export const Header: React.FC<Props> = ({ className }) => {
         </div>
         <div className="flex items-center gap-8">
           <SearchInput />
+          <PaymentButton />
           <ProfileButton onClickSignIn={() => setIsDialogOpen(true)} />
-
           <AuthModal open={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
         </div>
       </Container>

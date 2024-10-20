@@ -5,7 +5,7 @@ import { MediaPageDescription } from './content/media-page-description';
 import { MediaItem } from '@/@types/media-item';
 import { Actors, Info, Titles } from './info';
 import { filterPersonsData } from '@/shared/lib';
-import { HealthWarningContent } from '../health-warning-content';
+import { Observation } from '../observation';
 
 interface Props {
   item: MediaItem;
@@ -29,7 +29,13 @@ export const MediaPageInfoBlock: React.FC<Props> = ({ item, className }) => {
             description={item.description || ''}
             className={'text-[20px]'}
           />
-          {item.ageRating >= 18 && <HealthWarningContent />}
+          {item.ageRating >= 18 && (
+            <Observation
+              text={
+                'Контент может содержать сцены курения и употребления спиртных напитков. Курение и чрезмерное употребление алкоголя вредит вашему здоровью.'
+              }
+            />
+          )}
         </>
       )}
       {value === 2 && <Actors data={filterPersonsData(item.persons)} />}

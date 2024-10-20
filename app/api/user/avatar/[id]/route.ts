@@ -71,7 +71,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: number 
   }
 }
 
-export async function PATCH({ params }: { params: { id: number } }) {
+export async function PATCH(req: NextResponse, { params }: { params: { id: number } }) {
   try {
     const id = Number(params.id);
 

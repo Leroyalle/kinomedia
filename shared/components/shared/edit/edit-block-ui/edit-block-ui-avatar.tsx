@@ -17,7 +17,8 @@ interface Props {
 export const EditBlockUiAvatar: React.FC<Props> = ({ sessionId, imageUrl, loading, className }) => {
   const resetAvatar = useProfileStore((state) => state.resetAvatar);
 
-  const onClickDeleteAvatar = async () => {
+  const onClickDeleteAvatar = async (sessionId: number) => {
+    console.log(sessionId);
     resetAvatar(sessionId);
   };
 
@@ -35,7 +36,7 @@ export const EditBlockUiAvatar: React.FC<Props> = ({ sessionId, imageUrl, loadin
         'relative w-fit py-2 pl-0 overflow-hidden flex flex-col items-center',
         className,
       )}>
-      <X className="absolute right-0 top-0" onClick={() => onClickDeleteAvatar()} />
+      <X className="absolute right-0 top-0" onClick={() => onClickDeleteAvatar(sessionId)} />
       <UserAvatar imageUrl={imageUrl} className="w-32 h-32" />
       <SelectFile title={'Изменить'} sessionId={sessionId} />
     </div>

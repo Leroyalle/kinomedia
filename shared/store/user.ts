@@ -32,7 +32,7 @@ export const useProfileStore = create<Store>()((set) => ({
       });
     } catch (error) {
       set({ error: true });
-      console.log('Error [GET_USER_DATA]0', error);
+      console.log('Error [GET_USER_DATA]', error);
     } finally {
       set({ loading: false });
     }

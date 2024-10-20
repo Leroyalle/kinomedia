@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Nunito } from 'next/font/google';
+import { Rubik_Mono_One } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/shared/components/shared';
 const nunito = Nunito({
