@@ -40,8 +40,15 @@ model CompletedSubscription {
   user   User? @relation(fields: [userId], references: [id])
   userId Int   @unique
 
+  status  StatusEnum
   expires DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum StatusEnum {
+  PENDING
+  SUCCEEDED
+  CANCELLED
 }

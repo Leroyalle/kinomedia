@@ -2,7 +2,7 @@
 
 import { prisma } from '@/prisma/prisma-client';
 import { getUserSession } from '@/shared/lib/get-user-session';
-import { Prisma } from '@prisma/client';
+import { Prisma, StatusEnum } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 
 export async function registerUser(body: Prisma.UserCreateInput) {
@@ -116,6 +116,42 @@ export async function resetAvatar() {
     },
     data: {
       image: null,
+    },
+  });
+}
+
+export async function createSubscription(subscriptionId: number) {
+  const session = await getUserSession();
+
+  if (!session) {
+    return null;
+  }
+
+  const findUser = await prisma.user.findFirst({
+    where: {
+      id: Number(session.id),
+    },
+  });
+
+  if (!findUser) {
+    throw new Error('Account not found');
+  }
+
+  const findSubscription = await prisma.subscription.findFirst({
+    where: {
+      id: subscriptionId,
+    },
+  });
+
+  if (!findSubscription) {
+    throw new Error('Subscription not found');
+  }
+
+  const subscription = await prisma.completedSubscription.create({
+    data: {
+      userId: findUser.id,
+      expires: new Date(new Date().setMonth(1, 6)).toISOString(),
+      status: StatusEnum.PENDING,
     },
   });
 }

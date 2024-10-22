@@ -20,6 +20,7 @@ export const ProfileBlocksWrapper: React.FC<Props> = ({
   image,
   className,
 }) => {
+  // TODO: показывать имя если есть
   return (
     <section className={cn('w-full', className)}>
       <div className="flex justify-between mb-4">

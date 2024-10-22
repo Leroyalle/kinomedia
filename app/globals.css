@@ -284,3 +284,9 @@
 .bottom-gallery .swiper-button-prev {
   top: 110px !important;
 }
+
+.scroll-hidden {
+  overflow: hidden !important;
+  touch-action: none !important;
+  -ms-touch-action: none !important;
+}
