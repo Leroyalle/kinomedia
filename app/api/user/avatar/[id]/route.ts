@@ -26,7 +26,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: number 
     });
 
     if (!findUser) {
-      return null;
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: number 
   }
 }
 
-export async function PATCH(req: NextResponse, { params }: { params: { id: number } }) {
+export async function PATCH(req: NextRequest, { params }: { params: { id: number } }) {
   try {
     const id = Number(params.id);
 
@@ -82,7 +82,7 @@ export async function PATCH(req: NextResponse, { params }: { params: { id: numbe
     });
 
     if (!findUser) {
-      return NextResponse.json({ message: 'User not found' });
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
     const data = await prisma.user.update({

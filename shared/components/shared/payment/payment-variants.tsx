@@ -15,6 +15,9 @@ interface Props {
 export const PaymentVariants: React.FC<Props> = ({ items, className }) => {
   const [isOpened, setIsOpened] = React.useState(false);
 
+  if (!items || items.length === 0) {
+    return null;
+  }
   return (
     <section className={className}>
       <PaymentHeader className="mb-4" />

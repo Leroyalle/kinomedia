@@ -6,7 +6,8 @@ import { Api } from '../services/api-client';
 export const useFetchFilms = (genre: string | undefined) => {
   const { ref, inView, entry } = useInView();
   const genreName = genre ? `genres.name=${genre}` : '';
-  const initialParams = `&notNullFields=movieLength&isSeries=false&limit=10&rating.kp=6-10&${genreName}`;
+  const initialParams = `&notNullFields=movieLength&isSeries=false&limit=25&rating.kp=6-10&${genreName}`;
+  // FIXME: если лимит меньше чем полученный массив, запрос не отправлять
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ['films', genre],

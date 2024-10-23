@@ -1,7 +1,7 @@
 import React from 'react';
 import { Logo } from '../logo';
 import { Title } from '../title';
-import { Form, Info, Overlay } from './ui';
+import { Background, Form, Info, Overlay } from './ui';
 import { useSubscriptionModalStore } from '@/shared/store';
 import { X } from 'lucide-react';
 import { getPluralValues } from '@/shared/lib';
@@ -30,7 +30,7 @@ export const SubscriptionConfirmation: React.FC<Props> = ({ onClose }) => {
 
   return (
     <Overlay>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center z-10">
         <Logo />
         <X onClick={() => onClickClose()} className="absolute right-12 top-12 text-white" />
         <div className="flex flex-col mt-28 text-white max-w-[343px]">
@@ -43,6 +43,7 @@ export const SubscriptionConfirmation: React.FC<Props> = ({ onClose }) => {
           <Form monthCount={monthCount} pricePerMonth={pricePerMonth} />
         </div>
       </div>
+      <Background />
     </Overlay>
   );
 };
