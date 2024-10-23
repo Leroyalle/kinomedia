@@ -25,6 +25,7 @@ export const PaymentVariants: React.FC<Props> = ({ items, className }) => {
         {items.map((item) => (
           <li key={item.id}>
             <PaymentItem
+              id={item.id}
               monthCount={item.monthCount}
               pricePerMonth={item.pricePerMonth}
               onClosePayButton={() => setIsOpened(true)}

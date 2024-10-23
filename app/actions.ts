@@ -1,6 +1,8 @@
 'use server';
 
 import { prisma } from '@/prisma/prisma-client';
+import { PaySubscriptionTemplate } from '@/shared/components/shared/email-templates';
+import { createPayment, sendEmail } from '@/shared/lib';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { Prisma, StatusEnum } from '@prisma/client';
 import { hashSync } from 'bcrypt';
@@ -147,12 +149,37 @@ export async function createSubscription(subscriptionId: number) {
     throw new Error('Subscription not found');
   }
 
-  const subscription = await prisma.completedSubscription.create({
+  const createdSubscription = await prisma.completedSubscription.create({
     data: {
       userId: findUser.id,
       expires: new Date(new Date().setMonth(1, 6)).toISOString(),
       status: StatusEnum.PENDING,
     },
   });
-  // TODO: дописать
+
+  const totalPrice = findSubscription.monthCount * findSubscription.pricePerMonth;
+
+  const paymentData = await createPayment({
+    amount: totalPrice,
+    description: 'Оплата подписки' + createdSubscription.id,
+    orderId: createdSubscription.id,
+  });
+
+  if (!paymentData) {
+    throw new Error('Не удалось создать заказ');
+  }
+
+  const paymentUrl = paymentData.confirmation.confirmation_url;
+  await sendEmail(
+    findUser.email,
+    'Kinomedia | Оплата подписки',
+    PaySubscriptionTemplate({
+      fullName: findUser.fullName,
+      monthCount: findSubscription.monthCount,
+      totalPrice,
+      paymentUrl,
+    }),
+  );
+
+  return paymentUrl;
 }

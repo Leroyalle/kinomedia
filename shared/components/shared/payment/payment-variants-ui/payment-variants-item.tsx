@@ -4,6 +4,7 @@ import { Head, PayButton, Price } from './item-ui';
 import { useSubscriptionModalStore } from '@/shared/store';
 
 interface Props {
+  id: number;
   monthCount: number;
   pricePerMonth: number;
   onClosePayButton: VoidFunction;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export const PaymentVariantsItem: React.FC<Props> = ({
+  id,
   monthCount,
   pricePerMonth,
   onClosePayButton,
@@ -19,7 +21,7 @@ export const PaymentVariantsItem: React.FC<Props> = ({
   const setValues = useSubscriptionModalStore((store) => store.setValues);
 
   const onClickPayButton = () => {
-    setValues(monthCount, pricePerMonth);
+    setValues(id, monthCount, pricePerMonth);
     onClosePayButton();
   };
   return (
