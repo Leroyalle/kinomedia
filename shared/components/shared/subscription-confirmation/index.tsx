@@ -5,7 +5,7 @@ import { Background, Form, Info, Overlay } from './ui';
 import { useSubscriptionModalStore } from '@/shared/store';
 import { X } from 'lucide-react';
 import { getPluralValues } from '@/shared/lib';
-import { monthRules } from '@/shared/constants';
+import { monthRules, userAgreementData } from '@/shared/constants';
 
 interface Props {
   onClose: VoidFunction;
@@ -40,7 +40,11 @@ export const SubscriptionConfirmation: React.FC<Props> = ({ onClose }) => {
             className="text-center mb-4 font-medium"
           />
           <Info monthCount={monthCount} pricePerMonth={pricePerMonth} />
-          <Form monthCount={monthCount} pricePerMonth={pricePerMonth} />
+          <Form
+            monthCount={monthCount}
+            pricePerMonth={pricePerMonth}
+            userAgreement={userAgreementData}
+          />
         </div>
       </div>
       <Background />
