@@ -5,6 +5,7 @@ import { Button } from '@/shared/components/ui';
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   monthCount: number;
   pricePerCount: number;
+  loading: boolean;
   className?: string;
 }
 

@@ -9,6 +9,7 @@ interface Props {
   pricePerMonth: number;
   userAgreement: TUserAgreementData;
   onClickPayButton: VoidFunction;
+  submitting: boolean;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ export const SubscriptionConfirmationForm: React.FC<Props> = ({
   pricePerMonth,
   userAgreement,
   onClickPayButton,
+  submitting,
   className,
 }) => {
   const [isConfirmed, setIsConfirmed] = React.useState(false);
@@ -26,6 +28,7 @@ export const SubscriptionConfirmationForm: React.FC<Props> = ({
         monthCount={monthCount}
         pricePerCount={pricePerMonth}
         disabled={!isConfirmed}
+        loading={submitting}
         onClick={onClickPayButton}
         type="button"
         className="mt-6 mb-3"

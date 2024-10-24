@@ -30,7 +30,7 @@ export default async function ProfilePage() {
   return (
     <Container className="px-20 py-16">
       <ProfileBlocksWrapper
-        id={Number(user.id)}
+        userId={Number(user.id)}
         email={user.email}
         fullName={user.fullName}
         image={user.image}

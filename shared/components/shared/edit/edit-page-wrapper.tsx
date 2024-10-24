@@ -14,11 +14,8 @@ export const EditPageWrapper: React.FC<Props> = ({ sessionId, className }) => {
     getUserData(sessionId);
   }, []);
 
-  const [id, fullName, email, image, loading, getUserData] = useProfileStore((state) => [
-    state.id,
-    state.fullName,
-    state.email,
-    state.image,
+  const [user, loading, getUserData] = useProfileStore((state) => [
+    state.user,
     state.loading,
     state.getUserData,
   ]);
@@ -28,11 +25,10 @@ export const EditPageWrapper: React.FC<Props> = ({ sessionId, className }) => {
       <BackButton className="pl-0 text-md mb-8 text-white" />
       {/* FIXME: пофиксить опциональный емейл, проверка уже есть в авторизации */}
       <EditBlock
-        // FIXME: get id or sessionId??
-        id={Number(id)}
-        fullName={fullName || ''}
-        email={email || ''}
-        imageUrl={image}
+        id={Number(user.id)}
+        fullName={user.fullName || ''}
+        email={user.email || ''}
+        imageUrl={user.image}
         loading={loading}
       />
     </div>

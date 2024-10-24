@@ -16,6 +16,7 @@ model User {
   image    String?
 
   completedSubscription CompletedSubscription?
+  subscribe             Int?
 
   provider   String?
   providerId String?

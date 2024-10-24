@@ -6,13 +6,21 @@ import { TitleAndId } from '../../user';
 
 interface Props {
   title?: string;
+  fullName?: string;
   image?: string | null;
   email: string;
   endAdornment?: React.ReactNode;
   className?: string;
 }
 
-export const PersonalData: React.FC<Props> = ({ title, image, email, endAdornment, className }) => {
+export const PersonalData: React.FC<Props> = ({
+  title,
+  fullName,
+  image,
+  email,
+  endAdornment,
+  className,
+}) => {
   return (
     <article
       className={cn('flex flex-col p-6 bg-[hsla(0,0%,100%,.1)] rounded-3xl h-[205px]', className)}>
@@ -21,7 +29,10 @@ export const PersonalData: React.FC<Props> = ({ title, image, email, endAdornmen
       <div className="flex gap-x-8 items-center">
         <Avatar imageUrl={image} className="w-24 h-24" />
         <div className="flex flex-col gap-y-2">
-          <span className="text-lg">{email}</span>
+          <div className="text-lg flex flex-col">
+            {fullName && <span>{fullName}</span>}
+            <span>{email}</span>
+          </div>
           <Link
             href={'/profile/edit'}
             className="text-[#636363] transition-all hover:text-white w-fit">

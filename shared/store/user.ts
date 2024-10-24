@@ -1,10 +1,16 @@
 import { create } from 'zustand';
 import { getUser, resetAvatar, updateAvatar } from '../services/user';
-interface Store {
+
+type TUserData = {
   id: number | null;
   fullName: string | null;
   email: string | null;
   image: string | null;
+  subscribe: number | null;
+};
+
+interface Store {
+  user: TUserData;
   loading: boolean;
   error: boolean;
   getUserData: (id: number) => void;
@@ -13,10 +19,7 @@ interface Store {
 }
 
 export const useProfileStore = create<Store>()((set) => ({
-  id: null,
-  fullName: null,
-  email: null,
-  image: null,
+  user: { id: null, fullName: null, email: null, image: null, subscribe: null },
   loading: true,
   error: false,
 
@@ -25,10 +28,13 @@ export const useProfileStore = create<Store>()((set) => ({
       set({ loading: true, error: false });
       const data = await getUser(id);
       set({
-        id: data.id,
-        fullName: data.fullName,
-        email: data.email,
-        image: data.image,
+        user: {
+          id: data.id,
+          fullName: data.fullName,
+          email: data.email,
+          image: data.image,
+          subscribe: data.subscribe,
+        },
       });
     } catch (error) {
       set({ error: true });
@@ -42,9 +48,12 @@ export const useProfileStore = create<Store>()((set) => ({
     try {
       set({ loading: true, error: false });
       const data = await resetAvatar(id);
-      set({
-        image: data.image,
-      });
+      set((prev) => ({
+        user: {
+          ...prev.user,
+          image: data.image,
+        },
+      }));
     } catch (error) {
       set({ error: true });
       console.log('Error [GET_USER_DATA]0', error);
@@ -57,10 +66,13 @@ export const useProfileStore = create<Store>()((set) => ({
     try {
       set({ loading: true, error: false });
       const data = await updateAvatar(id, formData);
-      set({
-        image: data.filePath,
-      });
-      set({ loading: false });
+      set((prev) => ({
+        user: {
+          ...prev.user,
+          image: data.filePath,
+        },
+        loading: false,
+      }));
     } catch (error) {
       set({ error: true });
       console.log('Error [CHANGE_AVATAR]', error);

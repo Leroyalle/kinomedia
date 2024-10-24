@@ -20,7 +20,7 @@ export const PaySubscriptionTemplate: React.FC<Props> = ({
     <div>
       <h1>Привет, {fullName}!</h1>
       <p>
-        Оплатите подписку на {subScriptionVariant} на сумму {totalPrice} перейдя по{' '}
+        Оплати подписку на {subScriptionVariant} на сумму {totalPrice} перейдя по{' '}
         <a href={paymentUrl}>этой ссылке</a>
       </p>
     </div>

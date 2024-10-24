@@ -37,7 +37,7 @@ export const SubscriptionConfirmation: React.FC<Props> = ({ onClose }) => {
       setSubmitting(true);
       const url = await createSubscription(id);
 
-      toast.error('Заказ успешно оформлен! 📝 Переход на оплату... ', {
+      toast.error('Подписка оформлена! 📝 Переход на оплату... ', {
         icon: '✅',
       });
 
@@ -47,7 +47,7 @@ export const SubscriptionConfirmation: React.FC<Props> = ({ onClose }) => {
     } catch (error) {
       console.log(error);
       setSubmitting(false);
-      toast.error('Не удалось создать заказ', {
+      toast.error('Не удалось оформить подписку', {
         icon: '❌',
       });
     }
@@ -69,6 +69,7 @@ export const SubscriptionConfirmation: React.FC<Props> = ({ onClose }) => {
             monthCount={monthCount}
             pricePerMonth={pricePerMonth}
             userAgreement={userAgreementData}
+            submitting={submitting}
             onClickPayButton={() => onClickPayButton()}
           />
         </div>
