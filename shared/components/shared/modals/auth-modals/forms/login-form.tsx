@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/shared/components/ui';
 import { signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
+import { revalidatePayment } from '@/app/actions';
 
 interface Props {
   onClose: VoidFunction;
@@ -32,7 +33,7 @@ export const LoginForm: React.FC<Props> = ({ onClose, className }) => {
       if (!resp?.ok) {
         throw Error();
       }
-
+      await revalidatePayment();
       onClose();
 
       toast.success('Вы успешно вошли в аккаунт', {

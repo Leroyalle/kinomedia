@@ -1,28 +1,26 @@
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { Head, PayButton, Price } from './item-ui';
-import { useSubscriptionModalStore } from '@/shared/store';
 
 interface Props {
+  session: boolean;
   id: number;
   monthCount: number;
   pricePerMonth: number;
-  onClosePayButton: VoidFunction;
+  onClickPayButton: (id: number, monthCount: number, pricePerMonth: number) => void;
   className?: string;
 }
 
 export const PaymentVariantsItem: React.FC<Props> = ({
+  session,
   id,
   monthCount,
   pricePerMonth,
-  onClosePayButton,
+  onClickPayButton,
   className,
 }) => {
-  const setValues = useSubscriptionModalStore((store) => store.setValues);
-
-  const onClickPayButton = () => {
-    setValues(id, monthCount, pricePerMonth);
-    onClosePayButton();
+  const onClickBuy = () => {
+    onClickPayButton(id, monthCount, pricePerMonth);
   };
   return (
     <article className={cn('bg-[hsla(0,0%,100%,.1)] rounded-3xl', className)}>
@@ -30,9 +28,10 @@ export const PaymentVariantsItem: React.FC<Props> = ({
         <Head monthCount={monthCount} />
         <Price pricePerMonth={pricePerMonth} className="mt-20 mb-12" />
         <PayButton
+          session={session}
           pricePerMonth={pricePerMonth}
           monthCount={monthCount}
-          onClick={onClickPayButton}
+          onClick={onClickBuy}
         />
       </div>
     </article>

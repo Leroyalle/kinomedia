@@ -1,11 +1,11 @@
 'use server';
-
 import { prisma } from '@/prisma/prisma-client';
 import { PaySubscriptionTemplate } from '@/shared/components/shared/email-templates';
 import { createPayment, sendEmail } from '@/shared/lib';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { Prisma, StatusEnum } from '@prisma/client';
 import { hashSync } from 'bcrypt';
+import { revalidatePath } from 'next/cache';
 
 export async function registerUser(body: Prisma.UserCreateInput) {
   try {
@@ -182,4 +182,8 @@ export async function createSubscription(subscriptionId: number) {
   );
 
   return paymentUrl;
+}
+
+export async function revalidatePayment() {
+  revalidatePath('payment');
 }

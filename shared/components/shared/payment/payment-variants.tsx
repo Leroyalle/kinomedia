@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { cn } from '@/shared/lib/utils';
 import { PaymentHeader } from './payment-header';
 import { Subscription } from '@prisma/client';
 import { PaymentItem } from './payment-variants-ui';
@@ -8,13 +7,19 @@ import { SubscriptionConfirmation } from '../subscription-confirmation';
 import { useSubscriptionModalStore } from '@/shared/store';
 
 interface Props {
+  session: boolean;
   items: Subscription[];
   className?: string;
 }
 
-export const PaymentVariants: React.FC<Props> = ({ items, className }) => {
+export const PaymentVariants: React.FC<Props> = ({ session, items, className }) => {
+  const setValues = useSubscriptionModalStore((store) => store.setValues);
   const [isOpened, setIsOpened] = React.useState(false);
 
+  const onClickPayButton = (id: number, monthCount: number, pricePerMonth: number) => {
+    setValues(id, monthCount, pricePerMonth);
+    setIsOpened(true);
+  };
   if (!items || items.length === 0) {
     return null;
   }
@@ -25,10 +30,11 @@ export const PaymentVariants: React.FC<Props> = ({ items, className }) => {
         {items.map((item) => (
           <li key={item.id}>
             <PaymentItem
+              session={session}
               id={item.id}
               monthCount={item.monthCount}
               pricePerMonth={item.pricePerMonth}
-              onClosePayButton={() => setIsOpened(true)}
+              onClickPayButton={onClickPayButton}
             />
           </li>
         ))}

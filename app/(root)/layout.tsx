@@ -7,14 +7,17 @@ export const metadata: Metadata = {
 
 export default function HomeLayout({
   children,
+  auth,
 }: Readonly<{
   children: React.ReactNode;
+  auth: React.ReactNode;
 }>) {
   return (
     <main className="min-h-screen">
       <Header />
       {children}
       <Footer />
+      {auth}
     </main>
   );
 }

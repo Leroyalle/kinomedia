@@ -65,6 +65,7 @@ export const authOptions: AuthOptions = {
         if (account?.provider === 'credentials') {
           return true;
         }
+
         if (!user.email) {
           return false;
         }
@@ -126,11 +127,14 @@ export const authOptions: AuthOptions = {
       const findUser = await prisma.user.findFirst({
         where: {
           OR: [
-            { provider: account?.provider, providerId: account?.providerAccountId },
+            ...(account?.provider !== 'credentials'
+              ? [{ provider: account?.provider, providerId: account?.providerAccountId }]
+              : []),
             { email: token.email },
           ],
         },
       });
+
       if (findUser) {
         token.id = String(findUser.id);
       }

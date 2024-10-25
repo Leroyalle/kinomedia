@@ -5,11 +5,10 @@ import { useSession } from 'next-auth/react';
 import { CircleUser } from 'lucide-react';
 
 interface Props {
-  onClickSignIn: VoidFunction;
   className?: string;
 }
 
-export const ProfileButton: React.FC<Props> = ({ onClickSignIn, className }) => {
+export const ProfileButton: React.FC<Props> = ({ className }) => {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
@@ -18,9 +17,11 @@ export const ProfileButton: React.FC<Props> = ({ onClickSignIn, className }) => 
   return (
     <>
       {!session ? (
-        <Button onClick={onClickSignIn} className="text-md" variant={'link'}>
-          Войти
-        </Button>
+        <Link href={'/authorize'}>
+          <Button className="text-md" variant={'link'}>
+            Войти
+          </Button>
+        </Link>
       ) : (
         <Link href="/profile">
           <Button className="flex items-center gap-2">
