@@ -18,7 +18,6 @@ export const EditBlockUiAvatar: React.FC<Props> = ({ sessionId, imageUrl, loadin
   const resetAvatar = useProfileStore((state) => state.resetAvatar);
 
   const onClickDeleteAvatar = async (sessionId: number) => {
-    console.log(sessionId);
     resetAvatar(sessionId);
   };
 

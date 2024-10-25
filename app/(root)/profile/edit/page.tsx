@@ -20,7 +20,7 @@ export default async function EditProfilePage() {
 
   return (
     <Container className="px-20 py-16">
-      <EditPageWrapper sessionId={Number(session.id)} />
+      <EditPageWrapper sessionId={Number(user.id)} />
     </Container>
   );
 }

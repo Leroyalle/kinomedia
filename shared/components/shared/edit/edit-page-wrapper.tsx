@@ -23,11 +23,11 @@ export const EditPageWrapper: React.FC<Props> = ({ sessionId, className }) => {
   return (
     <div className={className}>
       <BackButton className="pl-0 text-md mb-8 text-white" />
-      {/* FIXME: пофиксить опциональный емейл, проверка уже есть в авторизации */}
+      {/* FIXME: пофиксить опциональный емейл, инициализируется null в сторе */}
       <EditBlock
         id={Number(user.id)}
-        fullName={user.fullName || ''}
-        email={user.email || ''}
+        fullName={user.fullName!}
+        email={user.email!}
         imageUrl={user.image}
         loading={loading}
       />

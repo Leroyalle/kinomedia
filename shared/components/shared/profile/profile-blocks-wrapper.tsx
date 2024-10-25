@@ -1,11 +1,9 @@
-'use client';
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { PersonalData } from './blocks';
 import { UserId } from '../user';
 import { profileActionsData } from '@/shared/constants';
 import { DarkBlock } from './blocks/dark-block';
-import { useProfileStore } from '@/shared/store';
 
 interface Props {
   userId: number;
@@ -22,22 +20,16 @@ export const ProfileBlocksWrapper: React.FC<Props> = ({
   image,
   className,
 }) => {
-  const [user, getUserData] = useProfileStore((state) => [state.user, state.getUserData]);
-  React.useEffect(() => {
-    getUserData(userId);
-  }, []);
-
-  // TODO: показывать имя если есть
   return (
     <section className={cn('w-full', className)}>
       <div className="flex justify-between mb-4">
         <PersonalData
           className="w-[67%] mr-4"
           title={'Личные данные'}
-          fullName={user.fullName || fullName}
-          endAdornment={<UserId id={user.id || userId} />}
-          email={user.email || email}
-          image={user.image || image}
+          fullName={fullName}
+          endAdornment={<UserId id={userId} />}
+          email={email}
+          image={image}
         />
         {profileActionsData.slice(0, 1).map((action, i) => (
           <DarkBlock

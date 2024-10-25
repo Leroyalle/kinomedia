@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerFormSchema, TRegisterFormSchema } from '../../modals/auth-modals/forms/schemas';
 import { Button } from '@/shared/components/ui';
 import toast from 'react-hot-toast';
-import { updateUser } from '@/app/actions';
+import { updateDataPath, updateUser } from '@/app/actions';
 
 interface Props {
   fullName: string;
@@ -43,6 +43,7 @@ export const EditBlockUiInputs: React.FC<Props> = ({ fullName, email, loading, c
       form.resetField('password');
       form.resetField('confirmPassword');
 
+      await updateDataPath('/profile');
       toast.error('Данные обновлены', {
         icon: '✅',
       });
