@@ -7,7 +7,7 @@ export default async function Payment() {
   const subscriptions = await prisma.subscription.findMany();
 
   return (
-    <Container className="px-20 py-16">
+    <Container className="px-16 py-10">
       <PaymentVariants session={Boolean(session)} items={subscriptions} />
     </Container>
   );

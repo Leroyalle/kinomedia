@@ -3,7 +3,7 @@ import { prisma } from '@/prisma/prisma-client';
 import { PaySubscriptionTemplate } from '@/shared/components/shared/email-templates';
 import { createPayment, sendEmail } from '@/shared/lib';
 import { getUserSession } from '@/shared/lib/get-user-session';
-import { Prisma, StatusEnum } from '@prisma/client';
+import { ActiveStatusEnum, PaymentStatusEnum, Prisma } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 import { revalidatePath } from 'next/cache';
 
@@ -96,92 +96,122 @@ export async function deleteUser() {
 }
 
 export async function resetAvatar() {
-  const currentUser = await getUserSession();
+  try {
+    const currentUser = await getUserSession();
 
-  if (!currentUser) {
-    return null;
+    if (!currentUser) {
+      return null;
+    }
+
+    const findUser = await prisma.user.findFirst({
+      where: {
+        id: Number(currentUser.id),
+      },
+    });
+
+    if (!findUser) {
+      return null;
+    }
+
+    await prisma.user.update({
+      where: {
+        id: findUser.id,
+      },
+      data: {
+        image: null,
+      },
+    });
+  } catch (error) {
+    console.log('Error [RESET_AVATAR]', error);
   }
-
-  const findUser = await prisma.user.findFirst({
-    where: {
-      id: Number(currentUser.id),
-    },
-  });
-
-  if (!findUser) {
-    return null;
-  }
-
-  await prisma.user.update({
-    where: {
-      id: findUser.id,
-    },
-    data: {
-      image: null,
-    },
-  });
 }
 
 export async function createSubscription(subscriptionId: number) {
-  const session = await getUserSession();
+  try {
+    const session = await getUserSession();
 
-  if (!session) {
-    return null;
+    if (!session) {
+      return null;
+    }
+
+    const findUser = await prisma.user.findFirst({
+      where: {
+        id: Number(session.id),
+      },
+      include: {
+        completedSubscription: {
+          where: {
+            activeStatus: ActiveStatusEnum.ACTIVE,
+          },
+        },
+      },
+    });
+
+    if (!findUser) {
+      throw new Error('Account not found');
+    }
+
+    const findSubscription = await prisma.subscription.findFirst({
+      where: {
+        id: subscriptionId,
+      },
+    });
+
+    if (!findSubscription) {
+      throw new Error('Subscription not found');
+    }
+
+    const createdSubscription = await prisma.completedSubscription.create({
+      data: {
+        userId: findUser.id,
+        expires: new Date(new Date().setMonth(1, 6)).toISOString(),
+        // ! нет доступа к yookassa, не могу отправлять колбек успешной оплаты на роут, через который буду менять статус подпискки
+        activeStatus: ActiveStatusEnum.ACTIVE,
+        paymentStatus: PaymentStatusEnum.SUCCEEDED,
+      },
+    });
+
+    if (findUser.completedSubscription.length > 0) {
+      await prisma.completedSubscription.updateMany({
+        where: {
+          id: {
+            in: findUser.completedSubscription.map((sub) => sub.id),
+          },
+        },
+        data: {
+          activeStatus: ActiveStatusEnum.CANCELLED,
+        },
+      });
+    }
+
+    const totalPrice = findSubscription.monthCount * findSubscription.pricePerMonth;
+
+    const paymentData = await createPayment({
+      amount: totalPrice,
+      description: 'Оплата подписки' + createdSubscription.id,
+      orderId: createdSubscription.id,
+    });
+
+    if (!paymentData) {
+      throw new Error('Не удалось создать заказ');
+    }
+
+    const paymentUrl = paymentData.confirmation.confirmation_url;
+    await sendEmail(
+      findUser.email,
+      'Kinomedia | Оплата подписки',
+      PaySubscriptionTemplate({
+        fullName: findUser.fullName,
+        monthCount: findSubscription.monthCount,
+        totalPrice,
+        paymentUrl,
+      }),
+    );
+
+    return paymentUrl;
+  } catch (error) {
+    console.log('Error [CREATE_SUBSCRIPTION]', error);
   }
-
-  const findUser = await prisma.user.findFirst({
-    where: {
-      id: Number(session.id),
-    },
-  });
-
-  if (!findUser) {
-    throw new Error('Account not found');
-  }
-
-  const findSubscription = await prisma.subscription.findFirst({
-    where: {
-      id: subscriptionId,
-    },
-  });
-
-  if (!findSubscription) {
-    throw new Error('Subscription not found');
-  }
-
-  const createdSubscription = await prisma.completedSubscription.create({
-    data: {
-      userId: findUser.id,
-      expires: new Date(new Date().setMonth(1, 6)).toISOString(),
-      status: StatusEnum.PENDING,
-    },
-  });
-
-  const totalPrice = findSubscription.monthCount * findSubscription.pricePerMonth;
-
-  const paymentData = await createPayment({
-    amount: totalPrice,
-    description: 'Оплата подписки' + createdSubscription.id,
-    orderId: createdSubscription.id,
-  });
-
-  if (!paymentData) {
-    throw new Error('Не удалось создать заказ');
-  }
-
-  const paymentUrl = paymentData.confirmation.confirmation_url;
-  await sendEmail(
-    findUser.email,
-    'Kinomedia | Оплата подписки',
-    PaySubscriptionTemplate({
-      fullName: findUser.fullName,
-      monthCount: findSubscription.monthCount,
-      totalPrice,
-      paymentUrl,
-    }),
-  );
-
-  return paymentUrl;
 }
 
 export async function updateDataPath(path: string) {

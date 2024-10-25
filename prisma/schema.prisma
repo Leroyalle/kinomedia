@@ -15,7 +15,7 @@ model User {
   password String
   image    String?
 
-  completedSubscription CompletedSubscription?
+  completedSubscription CompletedSubscription[]
   subscribe             Int?
 
   provider   String?
@@ -39,17 +39,25 @@ model CompletedSubscription {
   id Int @id @default(autoincrement())
 
   user   User? @relation(fields: [userId], references: [id])
-  userId Int   @unique
+  userId Int
 
-  status  StatusEnum
-  expires DateTime
+  expires      DateTime
+  activeStatus ActiveStatusEnum
+
+  paymentStatus PaymentStatusEnum
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-enum StatusEnum {
+enum PaymentStatusEnum {
   PENDING
   SUCCEEDED
+  CANCELLED
+}
+
+enum ActiveStatusEnum {
+  ACTIVE
+  EXPIRES
   CANCELLED
 }

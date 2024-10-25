@@ -37,3 +37,4 @@ export { EditBlock } from './edit';
 export { InfoBlock } from './info-block';
 export { EditPageWrapper } from './edit';
 export { PaymentVariants } from './payment';
+export { PaymentProfileWrapper } from './payment-profile';

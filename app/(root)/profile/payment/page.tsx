@@ -1,5 +1,5 @@
 import { prisma } from '@/prisma/prisma-client';
-import { Container } from '@/shared/components/shared';
+import { Container, PaymentProfileWrapper } from '@/shared/components/shared';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -17,7 +17,10 @@ export default async function PaymentProfilePage() {
   if (!user) {
     redirect('/not-auth');
   }
-  // TODO: дописать страницу
 
-  return <Container className="px-20 py-16">Подписки</Container>;
+  return (
+    <Container className="px-16 py-10">
+      <PaymentProfileWrapper />
+    </Container>
+  );
 }
