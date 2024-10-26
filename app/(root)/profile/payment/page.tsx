@@ -18,9 +18,19 @@ export default async function PaymentProfilePage() {
     redirect('/not-auth');
   }
 
+  const subscriptions = await prisma.completedSubscription.findMany({
+    where: {
+      userId: user.id,
+    },
+    include: {
+      subscription: true,
+    },
+  });
+
   return (
     <Container className="px-16 py-10">
-      <PaymentProfileWrapper />
+      <PaymentProfileWrapper items={subscriptions} />
     </Container>
   );
 }
+

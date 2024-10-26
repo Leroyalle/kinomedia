@@ -1,16 +1,19 @@
 import React from 'react';
 import { BackButton } from '../back-button';
-import { PaymentProfileSubscribe } from './payment-profile-subscribe';
+import { PaymentProfileSubscriptionsList } from './payment-profile-subscriptions-list';
+import { CompletedSubscriptionWithRelation } from '@/@types/subscription';
 
 interface Props {
+  items: CompletedSubscriptionWithRelation[];
   className?: string;
 }
 
-export const PaymentProfileWrapper: React.FC<Props> = ({ className }) => {
+export const PaymentProfileWrapper: React.FC<Props> = ({ items, className }) => {
   return (
     <div className={className}>
       <BackButton className="mb-8 p-0 text-white" />
-      <PaymentProfileSubscribe />
+      <PaymentProfileSubscriptionsList items={items} />
     </div>
   );
 };
+

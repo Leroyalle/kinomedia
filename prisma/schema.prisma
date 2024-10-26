@@ -16,7 +16,6 @@ model User {
   image    String?
 
   completedSubscription CompletedSubscription[]
-  subscribe             Int?
 
   provider   String?
   providerId String?
@@ -31,6 +30,8 @@ model Subscription {
   monthCount    Int
   pricePerMonth Int
 
+  completedSubscription CompletedSubscription[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -38,8 +39,11 @@ model Subscription {
 model CompletedSubscription {
   id Int @id @default(autoincrement())
 
-  user   User? @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
   userId Int
+
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  subscriptionId Int
 
   expires      DateTime
   activeStatus ActiveStatusEnum

@@ -3,3 +3,4 @@ export { Input } from './input';
 export { Skeleton } from './skeleton';
 export { Checkbox } from './checkbox';
 export * from './dialog';
+export * from './alert-dialog';

@@ -160,11 +160,17 @@ export async function createSubscription(subscriptionId: number) {
     if (!findSubscription) {
       throw new Error('Subscription not found');
     }
-
+    const currentTime = new Date();
     const createdSubscription = await prisma.completedSubscription.create({
       data: {
         userId: findUser.id,
-        expires: new Date(new Date().setMonth(1, 6)).toISOString(),
+        subscriptionId: findSubscription.id,
+        expires: new Date(
+          new Date().setMonth(
+            currentTime.getMonth() + findSubscription.monthCount,
+            currentTime.getDate(),
+          ),
+        ).toISOString(),
         // ! нет доступа к yookassa, не могу отправлять колбек успешной оплаты на роут, через который буду менять статус подпискки
         activeStatus: ActiveStatusEnum.ACTIVE,
         paymentStatus: PaymentStatusEnum.SUCCEEDED,
@@ -211,6 +217,21 @@ export async function createSubscription(subscriptionId: number) {
     return paymentUrl;
   } catch (error) {
     console.log('Error [CREATE_SUBSCRIPTION]', error);
+  }
+}
+
+export async function cancelSubscription(id: number) {
+  try {
+    await prisma.completedSubscription.update({
+      where: {
+        id,
+      },
+      data: {
+        activeStatus: 'CANCELLED',
+      },
+    });
+  } catch (error) {
+    throw error;
   }
 }
 
