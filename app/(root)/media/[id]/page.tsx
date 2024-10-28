@@ -5,12 +5,13 @@ import { useMediaItem } from '@/shared/hooks';
 import { getUserSession } from '@/shared/lib/get-user-session';
 
 export default async function MediaPage({ params: { id } }: { params: { id: number } }) {
+  const session = await getUserSession();
   const data = await useMediaItem(id);
 
   return (
     <Container>
       {/* <MediaPlayer id={data.id} /> */}
-      <MediaPageWrapper item={data} />
+      <MediaPageWrapper auth={Boolean(session)} item={data} />
     </Container>
   );
 }

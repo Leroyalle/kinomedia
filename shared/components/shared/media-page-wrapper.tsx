@@ -10,12 +10,13 @@ import { Backdrop } from './backdrop';
 import { useCheckIfMediaLiked, useFetchMyMedia } from '@/shared/hooks';
 
 interface Props {
+  auth: boolean;
   item: MediaItem;
   className?: string;
 }
 
-export const MediaPageWrapper: React.FC<Props> = ({ item, className }) => {
-  const { checkedData, saveMutate, deleteMutate } = useFetchMyMedia();
+export const MediaPageWrapper: React.FC<Props> = ({ auth, item, className }) => {
+  const { checkedData, saveMutate, deleteMutate } = useFetchMyMedia(auth);
   const { liked, setLiked } = useCheckIfMediaLiked(checkedData, item);
 
   const onClickAddFavorites = () => {

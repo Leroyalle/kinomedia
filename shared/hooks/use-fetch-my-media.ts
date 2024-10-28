@@ -5,7 +5,7 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Api } from '../services/api-client';
 
-export const useFetchMyMedia = () => {
+export const useFetchMyMedia = (auth: boolean) => {
   const queryClient = useQueryClient();
   const { ref, inView, entry } = useInView();
 
@@ -24,6 +24,7 @@ export const useFetchMyMedia = () => {
   const { data: checkedData } = useQuery({
     queryKey: ['my-media-for-check-liked'],
     queryFn: () => getMyMedia(),
+    enabled: auth,
     refetchOnWindowFocus: false,
   });
 
@@ -35,6 +36,7 @@ export const useFetchMyMedia = () => {
       queryFn: ({ pageParam }) =>
         Api.user.getMyMedia(`?skip=${(pageParam - 1) * perPage}&take=${perPage}`),
       select: (data) => data.pages.map((item) => item),
+      enabled: auth,
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages, lastPageParam) => {
         if (lastPage.length === 0) {
