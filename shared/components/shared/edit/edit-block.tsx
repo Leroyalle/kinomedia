@@ -21,8 +21,13 @@ export const EditBlock: React.FC<Props> = ({
 }) => {
   return (
     <section className={className}>
-      <Head title={'Личные данные'} endAdornment={<UserId id={id} />} className="mb-4" />
-      <EditBlockUiAvatar className="mb-4" sessionId={id} imageUrl={imageUrl} loading={loading} />
+      <Head
+        title={'Личные данные'}
+        endAdornment={<UserId id={id} />}
+        className="mb-4"
+        loading={loading}
+      />
+      <EditBlockUiAvatar className="mb-4" imageUrl={imageUrl} loading={loading} />
       <EditBlockUiInputs fullName={fullName} email={email} loading={loading} />
       <hr className="bg-white w-full my-10" />
       <DeleteUserButton />

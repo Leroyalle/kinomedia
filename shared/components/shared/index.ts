@@ -38,3 +38,5 @@ export { InfoBlock } from './info-block';
 export { EditPageWrapper } from './edit';
 export { PaymentVariants } from './payment';
 export { PaymentProfileWrapper } from './payment-profile';
+export { HeaderWrapper } from './header-wrapper';
+export { MyMediaWrapper } from './my';

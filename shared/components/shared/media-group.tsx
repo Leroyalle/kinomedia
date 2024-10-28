@@ -25,7 +25,6 @@ export const MediaGroup: React.FC<Props> = ({ items, title, limit = 10, classNam
             year={item.year}
             movieLength={item.movieLength}
             seriesLength={item.seriesLength}
-            isSeries={item.isSeries}
             ratingKp={item.rating.kp}
           />
         ))}

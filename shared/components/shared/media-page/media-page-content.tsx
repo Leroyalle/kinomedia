@@ -6,10 +6,17 @@ import { cn } from '@/shared/lib/utils';
 
 interface Props {
   item: MediaItem;
+  liked: boolean;
+  onClickAddFavorites: VoidFunction;
   className?: string;
 }
 
-export const MediaPageContent: React.FC<Props> = ({ className, item }) => {
+export const MediaPageContent: React.FC<Props> = ({
+  item,
+  liked,
+  onClickAddFavorites,
+  className,
+}) => {
   return (
     <div className={cn('flex flex-col gap-3', className)}>
       <Details
@@ -27,7 +34,7 @@ export const MediaPageContent: React.FC<Props> = ({ className, item }) => {
         description={item.description || ''}
         className="text-lg max-w-[672px]"
       />
-      <Actions isSeries={item.isSeries} />
+      <Actions isSeries={item.isSeries} liked={liked} onClickAddFavorites={onClickAddFavorites} />
     </div>
   );
 };

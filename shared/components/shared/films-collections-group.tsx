@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { MediaGroup } from './media-group';
 import { useFetchFilms } from '@/shared/hooks';
 import { MediaItemsSkeleton } from './media-items-skeleton';
 import { MediaCollection } from './media-collection';

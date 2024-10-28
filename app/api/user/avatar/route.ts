@@ -2,12 +2,18 @@ import { prisma } from '@/prisma/prisma-client';
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import { getUserSession } from '@/shared/lib/get-user-session';
 
 const supportedTypes = ['image/jpeg', 'image/png', 'image/svg', 'image/svg+xml'];
 
 export async function POST(req: NextRequest, { params }: { params: { id: number } }) {
   try {
-    const id = Number(params.id);
+    // const user = await getServerSession({ req, ...authOptions });
+    const user = await getUserSession();
+
+    if (!user) {
+      return NextResponse.json({ message: 'Вы не авторизованы' }, { status: 401 });
+    }
     const formData = await req.formData();
     const file = formData.get('avatar');
 
@@ -21,7 +27,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: number 
 
     const findUser = await prisma.user.findFirst({
       where: {
-        id: id,
+        id: Number(user.id),
       },
     });
 
@@ -55,7 +61,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: number 
 
     await prisma.user.update({
       where: {
-        id: id,
+        id: findUser.id,
       },
       data: {
         image: filePath,
@@ -73,11 +79,16 @@ export async function POST(req: NextRequest, { params }: { params: { id: number 
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: number } }) {
   try {
-    const id = Number(params.id);
+    // const user = await getServerSession({ req, ...authOptions });
+    const user = await getUserSession();
+
+    if (!user) {
+      return NextResponse.json({ message: 'Вы не авторизованы' }, { status: 401 });
+    }
 
     const findUser = await prisma.user.findFirst({
       where: {
-        id: id,
+        id: Number(user.id),
       },
     });
 
@@ -87,10 +98,16 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: number
 
     const data = await prisma.user.update({
       where: {
-        id: id,
+        id: findUser.id,
       },
       data: {
         image: null,
+      },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        image: true,
       },
     });
     return NextResponse.json(data);

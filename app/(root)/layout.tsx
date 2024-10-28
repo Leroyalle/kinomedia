@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { Footer, Header } from '@/shared/components/shared';
+import { HeaderWrapper, Footer } from '@/shared/components/shared';
 
 export const metadata: Metadata = {
   title: 'Kinomedia',
+  description: 'Онлайн-кинотеатр Kinomedia с более чем 960 тысячами фильмов',
 };
 
 export default function HomeLayout({
@@ -14,7 +15,7 @@ export default function HomeLayout({
 }>) {
   return (
     <main className="min-h-screen">
-      <Header />
+      <HeaderWrapper />
       {children}
       <Footer />
       {auth}

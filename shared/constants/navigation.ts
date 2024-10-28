@@ -3,13 +3,11 @@ export const navigationData = {
     { text: 'Главная', href: '/' },
     { text: 'Фильмы', href: '/films' },
     { text: 'Сериалы', href: '/series' },
-    { text: 'Моё', href: '/my' },
   ],
   foot: [
     { text: 'Главная', href: '/' },
     { text: 'Фильмы', href: '/films' },
     { text: 'Сериалы', href: '/series' },
-    { text: 'Моё', href: '/my' },
     { text: 'Контакты', href: '/contacts' },
   ],
   options: [

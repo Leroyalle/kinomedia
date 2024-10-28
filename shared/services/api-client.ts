@@ -3,6 +3,7 @@ import * as movies from './movies';
 import * as mediaItem from './media-item';
 import * as search from './search-media';
 import * as random from './random';
+import * as user from './user';
 
 export const Api = {
   categories,
@@ -10,4 +11,5 @@ export const Api = {
   mediaItem,
   search,
   random,
+  user,
 };

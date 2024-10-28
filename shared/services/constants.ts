@@ -5,4 +5,5 @@ export enum ApiRouter {
   RANDOM = '/movie/random',
   USER = '/user',
   AVATAR = '/user/avatar',
+  MY = '/user/my',
 }

@@ -1,17 +1,19 @@
 import { prisma } from '@/prisma/prisma-client';
-import { Container, EditPageWrapper } from '@/shared/components/shared';
+import { Container, MyMediaWrapper } from '@/shared/components/shared';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-export default async function EditProfilePage() {
+export default async function My() {
   const session = await getUserSession();
   if (!session) {
     redirect('/not-auth');
   }
 
   const user = await prisma.user.findFirst({
-    where: { id: Number(session.id) },
+    where: {
+      id: Number(session.id),
+    },
   });
 
   if (!user) {
@@ -19,8 +21,8 @@ export default async function EditProfilePage() {
   }
 
   return (
-    <Container className="px-20 py-16">
-      <EditPageWrapper />
+    <Container>
+      <MyMediaWrapper />
     </Container>
   );
 }

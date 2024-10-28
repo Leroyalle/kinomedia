@@ -1,10 +1,11 @@
 export { useFetchCategories } from './use-fetch-categories';
 export { useMediaItem } from './use-media-item';
 export { useScrollPage } from './use-scroll-page';
-// export { useFetchSimilarMovies } from './use-fetch-similar-movies-d';
 export { useFilters } from './use-filters';
 export { useFetchSeries } from './use-fetch-series';
 export { useFetchFilms } from './use-fetch-films';
 export { useFetchMediaByParams } from './use-fetch-media-by-params';
 export { useFetchSimilarMovies } from './use-fetch-similar-movies';
 export { useFetchRandomMovie } from './use-fetch-random-movie';
+export { useFetchMyMedia } from './use-fetch-my-media';
+export { useCheckIfMediaLiked } from './use-check-if-media-liked';

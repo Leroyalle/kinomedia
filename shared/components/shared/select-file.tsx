@@ -4,11 +4,10 @@ import toast from 'react-hot-toast';
 import { useProfileStore } from '@/shared/store';
 
 interface Props {
-  sessionId: number;
   title?: string;
 }
 
-export const SelectFile: React.FC<Props> = ({ sessionId, title = 'Выбрать файл' }) => {
+export const SelectFile: React.FC<Props> = ({ title = 'Выбрать файл' }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const changeAvatar = useProfileStore((state) => state.changeAvatar);
 
@@ -28,7 +27,7 @@ export const SelectFile: React.FC<Props> = ({ sessionId, title = 'Выбрать
       const file = event.target.files[0];
       formData.append('avatar', file);
 
-      await changeAvatar(sessionId, formData);
+      await changeAvatar(formData);
 
       toast.error('Аватар успешно обновлен', {
         icon: '✅',

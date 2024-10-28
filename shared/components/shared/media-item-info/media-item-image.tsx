@@ -14,7 +14,7 @@ export const MediaItemImage: React.FC<Props> = ({ previewUrl, name, className })
       width={250}
       height={450}
       alt={name}
-      className={cn('w-full aspect-[2/3] rounded-3xl object-cover', className)}
+      className={cn('w-full h-full aspect-[2/3] rounded-3xl object-cover', className)}
     />
   );
 };

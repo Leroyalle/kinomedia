@@ -4,12 +4,11 @@ import { cn } from '@/shared/lib/utils';
 import { Title } from './title';
 import { MediaItem } from './media-item';
 import { MovieDTO } from '@/@types/mediaDTO';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
 
 interface Props {
   items: MovieDTO[];
@@ -38,7 +37,6 @@ export const MediaGroupSlider: React.FC<Props> = ({ items, title, className }) =
                 year={item.year}
                 movieLength={item.movieLength}
                 seriesLength={item.seriesLength}
-                isSeries={item.isSeries}
                 ratingKp={item.rating.kp}
               />
             </SwiperSlide>

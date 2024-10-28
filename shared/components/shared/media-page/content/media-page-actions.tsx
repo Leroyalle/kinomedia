@@ -1,14 +1,21 @@
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/components/ui';
-import { Bookmark, Forward, Heart } from 'lucide-react';
+import { Forward, Heart } from 'lucide-react';
 
 interface Props {
   isSeries: boolean;
+  liked: boolean;
+  onClickAddFavorites: VoidFunction;
   className?: string;
 }
 
-export const MediaPageActions: React.FC<Props> = ({ isSeries, className }) => {
+export const MediaPageActions: React.FC<Props> = ({
+  isSeries,
+  liked,
+  onClickAddFavorites,
+  className,
+}) => {
   return (
     <div className={cn('flex items-center gap-4', className)}>
       <Button variant={'secondary'} className="py-6 px-8 text-lg">
@@ -17,11 +24,8 @@ export const MediaPageActions: React.FC<Props> = ({ isSeries, className }) => {
       <Button variant="ghost" className="py-6 px-8 text-lg">
         Трейлер
       </Button>
-      <Button variant="ghost" className="py-6 px-4">
-        <Bookmark />
-      </Button>
-      <Button variant="ghost" className="py-6 px-4">
-        <Heart />
+      <Button onClick={onClickAddFavorites} variant="ghost" className="py-6 px-4">
+        <Heart className={cn(liked && ' fill-white')} />
       </Button>
       <Button variant="ghost" className="py-6 px-4">
         <Forward />

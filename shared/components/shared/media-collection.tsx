@@ -7,11 +7,10 @@ import { MovieDTO } from '@/@types/mediaDTO';
 interface Props {
   pages: MovieDTO[][];
   title?: string;
-  limit?: number;
   className?: string;
 }
 
-export const MediaCollection: React.FC<Props> = ({ pages, title, limit = 10, className }) => {
+export const MediaCollection: React.FC<Props> = ({ pages, title, className }) => {
   return (
     <div className={cn('flex flex-col justify-center gap-4', className)}>
       {title && <Title size="lg" text={title} />}
@@ -26,7 +25,6 @@ export const MediaCollection: React.FC<Props> = ({ pages, title, limit = 10, cla
               year={item.year}
               movieLength={item.movieLength}
               seriesLength={item.seriesLength}
-              isSeries={item.isSeries}
               ratingKp={item.rating.kp}
             />
           )),

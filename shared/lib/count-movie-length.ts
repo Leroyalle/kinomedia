@@ -1,4 +1,7 @@
-export const countMovieLength = (length: number): { hours: number; minutes: number } => {
+export const countMovieLength = (length: number | null): { hours: number; minutes: number } => {
+  if (!length) {
+    return { hours: 0, minutes: 0 };
+  }
   if (length < 60) {
     return { hours: 0, minutes: length };
   }

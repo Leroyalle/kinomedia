@@ -8,9 +8,8 @@ interface Props {
   name: string;
   previewUrl: string;
   year: number;
-  movieLength: number;
+  movieLength: number | null;
   seriesLength: number | null;
-  isSeries: boolean;
   ratingKp: number;
   className?: string;
 }
@@ -22,7 +21,6 @@ export const MediaItem: React.FC<Props> = ({
   year,
   movieLength,
   seriesLength,
-  isSeries,
   ratingKp,
   className,
 }) => {

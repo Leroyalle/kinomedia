@@ -7,7 +7,6 @@ interface Props {
   items: CompletedSubscriptionWithRelation[];
   className?: string;
 }
-
 export const PaymentProfileWrapper: React.FC<Props> = ({ items, className }) => {
   return (
     <div className={className}>
@@ -16,4 +15,3 @@ export const PaymentProfileWrapper: React.FC<Props> = ({ items, className }) => 
     </div>
   );
 };
-

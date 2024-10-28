@@ -6,16 +6,15 @@ type TUserData = {
   fullName: string | null;
   email: string | null;
   image: string | null;
-  subscribe: number | null;
 };
 
 interface Store {
   user: TUserData;
   loading: boolean;
   error: boolean;
-  getUserData: (id: number) => void;
-  resetAvatar: (id: number) => void;
-  changeAvatar: (id: number, formData: FormData) => void;
+  getUserData: () => void;
+  resetAvatar: VoidFunction;
+  changeAvatar: (formData: FormData) => void;
 }
 
 export const useProfileStore = create<Store>()((set) => ({
@@ -23,17 +22,16 @@ export const useProfileStore = create<Store>()((set) => ({
   loading: true,
   error: false,
 
-  getUserData: async (id: number) => {
+  getUserData: async () => {
     try {
       set({ loading: true, error: false });
-      const data = await getUser(id);
+      const data = await getUser();
       set({
         user: {
           id: data.id,
           fullName: data.fullName,
           email: data.email,
           image: data.image,
-          subscribe: data.subscribe,
         },
       });
     } catch (error) {
@@ -44,10 +42,10 @@ export const useProfileStore = create<Store>()((set) => ({
     }
   },
 
-  resetAvatar: async (id: number) => {
+  resetAvatar: async () => {
     try {
       set({ loading: true, error: false });
-      const data = await resetAvatar(id);
+      const data = await resetAvatar();
       set((prev) => ({
         user: {
           ...prev.user,
@@ -62,10 +60,10 @@ export const useProfileStore = create<Store>()((set) => ({
     }
   },
 
-  changeAvatar: async (id: number, formData: FormData) => {
+  changeAvatar: async (formData: FormData) => {
     try {
       set({ loading: true, error: false });
-      const data = await updateAvatar(id, formData);
+      const data = await updateAvatar(formData);
       set((prev) => ({
         user: {
           ...prev.user,

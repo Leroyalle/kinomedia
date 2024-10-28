@@ -5,7 +5,7 @@ import { countMovieLength } from '@/shared/lib';
 interface Props {
   name: string;
   year: number;
-  movieLength: number;
+  movieLength: number | null;
   seriesLength: number | null;
   className?: string;
 }

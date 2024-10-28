@@ -5,13 +5,12 @@ import { BackButton } from '../back-button';
 import { EditBlock } from './edit-block';
 
 interface Props {
-  sessionId: number;
   className?: string;
 }
 
-export const EditPageWrapper: React.FC<Props> = ({ sessionId, className }) => {
+export const EditPageWrapper: React.FC<Props> = ({ className }) => {
   React.useEffect(() => {
-    getUserData(sessionId);
+    getUserData();
   }, []);
 
   const [user, loading, getUserData] = useProfileStore((state) => [
