@@ -2,8 +2,8 @@ import React from 'react';
 import { cn } from '@/shared/lib/utils';
 import { PersonalData } from './blocks';
 import { UserId } from '../user';
-import { profileActionsData } from '@/shared/constants';
 import { DarkBlock } from './blocks/dark-block';
+import { Gem } from 'lucide-react';
 
 interface Props {
   userId: number;
@@ -31,28 +31,14 @@ export const ProfileBlocksWrapper: React.FC<Props> = ({
           email={email}
           image={image}
         />
-        {profileActionsData.slice(0, 1).map((action, i) => (
-          <DarkBlock
-            title={action.name}
-            key={i}
-            href={action.href}
-            action={action.action}
-            icon={<action.icon size={100} className="text-gray" />}
-            className="rounded-3xl w-[33%] text-[#636363]"
-          />
-        ))}
-      </div>
-      <div className="flex justify-between gap-x-4">
-        {profileActionsData.slice(1).map((action, i) => (
-          <DarkBlock
-            title={action.name}
-            key={i}
-            href={action.href}
-            action={action.action}
-            icon={<action.icon size={100} />}
-            className="rounded-3xl w-[33%] text-[#636363]"
-          />
-        ))}
+
+        <DarkBlock
+          title={'Подписка'}
+          href={'/profile/payment'}
+          action={'Управлять'}
+          icon={<Gem size={100} className="text-gray" />}
+          className="rounded-3xl w-[33%] text-[#636363]"
+        />
       </div>
     </section>
   );

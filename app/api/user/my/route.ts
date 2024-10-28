@@ -37,8 +37,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: number }
       where: {
         userId: findUser.id,
       },
-      skip: Number(skip),
-      take: Number(take),
+      skip: Number(skip) || 0,
+      take: Number(take) || undefined,
     });
 
     return NextResponse.json(myMedia);

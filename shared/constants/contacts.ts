@@ -1,21 +1,21 @@
 export const contacts = [
   {
-    icon: '/assets/contacts/tg.svg',
+    icon: '/assets/social-icons/tg.svg',
     text: 'Telegram',
     href: '#',
   },
   {
-    icon: '/assets/contacts/vk.svg',
+    icon: '/assets/social-icons/vk.svg',
     text: 'ВКонтакте',
     href: '#',
   },
   {
-    icon: '/assets/contacts/yt.svg',
+    icon: '/assets/social-icons/yt.svg',
     text: 'YouTube',
     href: '#',
   },
   {
-    icon: '/assets/contacts/tt.svg',
+    icon: '/assets/social-icons/tt.svg',
     text: 'TikTok',
     href: '#',
   },

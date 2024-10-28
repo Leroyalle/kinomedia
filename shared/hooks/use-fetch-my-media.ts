@@ -33,7 +33,7 @@ export const useFetchMyMedia = () => {
     useInfiniteQuery({
       queryKey: ['my-media'],
       queryFn: ({ pageParam }) =>
-        Api.user.getMyMedia(`skip=${(pageParam - 1) * perPage}&take=${perPage}`),
+        Api.user.getMyMedia(`?skip=${(pageParam - 1) * perPage}&take=${perPage}`),
       select: (data) => data.pages.map((item) => item),
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages, lastPageParam) => {

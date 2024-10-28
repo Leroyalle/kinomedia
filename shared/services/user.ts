@@ -16,7 +16,7 @@ export const updateAvatar = async (formData: FormData) => {
 };
 
 export const getMyMedia = async (params: string = ''): Promise<MyMedia[]> => {
-  return (await userInstance.get<MyMedia[]>(`${ApiRouter.MY}?${params}`)).data;
+  return (await userInstance.get<MyMedia[]>(`${ApiRouter.MY}${params}`)).data;
 };
 
 export const saveMyMedia = async (values: Omit<MyMedia, 'id' | 'userId'>): Promise<MyMedia> => {

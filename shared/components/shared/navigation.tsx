@@ -6,7 +6,7 @@ interface Props {
     text: string;
     href: string;
   }[];
-  session: boolean;
+  session?: boolean;
   active?: boolean;
   className?: string;
   childStyles?: string;

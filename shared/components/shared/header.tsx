@@ -1,6 +1,4 @@
-// components/Header.tsx
 'use client';
-
 import React from 'react';
 import { Container } from './container';
 import { cn } from '@/shared/lib/utils';

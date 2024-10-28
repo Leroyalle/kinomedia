@@ -6,7 +6,7 @@ import { Skeleton } from '../../ui';
 interface Props {
   title: string;
   endAdornment: React.ReactNode;
-  loading: Boolean;
+  loading?: Boolean;
   className?: string;
 }
 
