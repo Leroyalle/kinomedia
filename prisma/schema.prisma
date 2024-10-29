@@ -67,7 +67,7 @@ model SelectedMedia {
   year         Int
   movieLength  Int?
   seriesLength Int?
-  ratingKp     Int
+  ratingKp     Float
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

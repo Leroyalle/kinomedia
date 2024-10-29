@@ -39,6 +39,16 @@ export async function GET(req: NextRequest, { params }: { params: { id: number }
       },
       skip: Number(skip) || 0,
       take: Number(take) || undefined,
+      select: {
+        id: true,
+        name: true,
+        mediaId: true,
+        previewUrl: true,
+        year: true,
+        movieLength: true,
+        seriesLength: true,
+        ratingKp: true,
+      },
     });
 
     return NextResponse.json(myMedia);

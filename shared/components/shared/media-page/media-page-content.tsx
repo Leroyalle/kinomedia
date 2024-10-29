@@ -8,6 +8,8 @@ interface Props {
   item: MediaItem;
   liked: boolean;
   onClickAddFavorites: VoidFunction;
+  onClickWatchMedia: VoidFunction;
+  lovesLoading: boolean;
   className?: string;
 }
 
@@ -15,6 +17,8 @@ export const MediaPageContent: React.FC<Props> = ({
   item,
   liked,
   onClickAddFavorites,
+  onClickWatchMedia,
+  lovesLoading,
   className,
 }) => {
   return (
@@ -34,7 +38,13 @@ export const MediaPageContent: React.FC<Props> = ({
         description={item.description || ''}
         className="text-lg max-w-[672px]"
       />
-      <Actions isSeries={item.isSeries} liked={liked} onClickAddFavorites={onClickAddFavorites} />
+      <Actions
+        isSeries={item.isSeries}
+        liked={liked}
+        lovesLoading={lovesLoading}
+        onClickAddFavorites={onClickAddFavorites}
+        onClickWatchMedia={onClickWatchMedia}
+      />
     </div>
   );
 };

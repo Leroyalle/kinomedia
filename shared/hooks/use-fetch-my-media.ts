@@ -4,21 +4,37 @@ import { MyMedia } from '@/@types/my';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Api } from '../services/api-client';
+import toast from 'react-hot-toast';
 
-export const useFetchMyMedia = (auth: boolean) => {
+export const useFetchMyMedia = (auth: boolean = true) => {
   const queryClient = useQueryClient();
   const { ref, inView, entry } = useInView();
+  const [liked, setLiked] = React.useState(false);
 
   const { mutate: saveMutate, isPending: isSavingPending } = useMutation({
     mutationKey: ['save-media'],
     mutationFn: (values: Omit<MyMedia, 'id' | 'userId'>) => saveMyMedia(values),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['my-media'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['my-media'] });
+      setLiked(true);
+      toast.success('Добавлено!', { icon: '✅' });
+    },
+    onError: () => {
+      toast.error('Не удалось удалить!', { icon: '❌' });
+    },
   });
 
   const { mutate: deleteMutate, isPending: isDeletingPending } = useMutation({
     mutationKey: ['delete-media'],
     mutationFn: (mediaId: number) => deleteMyMedia(mediaId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['my-media'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['my-media'] });
+      setLiked(false);
+      toast.success('Удалено!', { icon: '🚮' });
+    },
+    onError: () => {
+      toast.error('Не удалось удалить!', { icon: '❌' });
+    },
   });
 
   const { data: checkedData } = useQuery({
@@ -64,5 +80,7 @@ export const useFetchMyMedia = (auth: boolean) => {
     isSavingPending,
     deleteMutate,
     isDeletingPending,
+    liked,
+    setLiked,
   };
 };

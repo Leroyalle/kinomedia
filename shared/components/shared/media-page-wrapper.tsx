@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import toast from 'react-hot-toast';
 import { cn } from '@/shared/lib/utils';
 import { MediaItem } from '@/@types/media-item';
 import { Content, Creators, InfoBlock, SimilarMovies } from './media-page';
@@ -8,19 +7,33 @@ import { BackButton } from './back-button';
 import { Title } from './title';
 import { Backdrop } from './backdrop';
 import { useCheckIfMediaLiked, useFetchMyMedia } from '@/shared/hooks';
+import { useRouter } from 'next/navigation';
+import { MediaPlayer } from './media-player';
 
 interface Props {
   auth: boolean;
+  subscription: boolean;
   item: MediaItem;
   className?: string;
 }
 
-export const MediaPageWrapper: React.FC<Props> = ({ auth, item, className }) => {
-  const { checkedData, saveMutate, deleteMutate } = useFetchMyMedia(auth);
-  const { liked, setLiked } = useCheckIfMediaLiked(checkedData, item);
+export const MediaPageWrapper: React.FC<Props> = ({ auth, subscription, item, className }) => {
+  const router = useRouter();
+  const [isOpened, setIsOpened] = React.useState(false);
+  const {
+    checkedData,
+    isLoading,
+    saveMutate,
+    deleteMutate,
+    liked,
+    setLiked,
+    isSavingPending,
+    isDeletingPending,
+  } = useFetchMyMedia(auth);
+  useCheckIfMediaLiked(checkedData, item, setLiked);
 
   const onClickAddFavorites = () => {
-    try {
+    if (auth) {
       if (!liked) {
         saveMutate({
           mediaId: item.id,
@@ -31,17 +44,24 @@ export const MediaPageWrapper: React.FC<Props> = ({ auth, item, className }) => 
           seriesLength: item.seriesLength,
           ratingKp: item.rating.kp,
         });
-        setLiked(true);
-        toast.success('Сохранено!', { icon: '✅' });
       } else {
         deleteMutate(item.id);
-        setLiked(false);
-        toast.success('Удалено!', { icon: '🚮' });
       }
-    } catch (error) {
-      console.log(error);
-      toast.error('Не удалось удалить!', { icon: '❌' });
+    } else {
+      router.push('/authorize');
     }
+  };
+
+  const onClickWatchMedia = () => {
+    if (!auth) {
+      router.push('/authorize');
+      return;
+    }
+    if (!subscription) {
+      router.push('/payment');
+      return;
+    }
+    setIsOpened(true);
   };
 
   return (
@@ -52,9 +72,16 @@ export const MediaPageWrapper: React.FC<Props> = ({ auth, item, className }) => 
         <Backdrop imageUrl={item.backdrop?.url} className="absolute w-full h-full inset-0 -z-10" />
         <BackButton className="absolute top-4 left-0 pl-0 text-white text-md" />
         <div className="absolute w-full h-full flex items-center top-0 left-0">
-          <Content item={item} liked={liked} onClickAddFavorites={() => onClickAddFavorites()} />
+          <Content
+            item={item}
+            liked={liked}
+            onClickAddFavorites={() => onClickAddFavorites()}
+            onClickWatchMedia={() => onClickWatchMedia()}
+            lovesLoading={isSavingPending || isDeletingPending || isLoading}
+          />
         </div>
       </section>
+      {isOpened && <MediaPlayer mediaId={item.id} onClose={() => setIsOpened(false)} />}
       <InfoBlock item={item} />
       <div className="flex flex-col gap-2 mt-10">
         <Title text="Актеры и создатели" size={'lg'} />

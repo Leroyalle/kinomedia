@@ -10,6 +10,8 @@ interface Props {
   isSeries: boolean;
   liked: boolean;
   onClickAddFavorites: VoidFunction;
+  onClickWatchMedia: VoidFunction;
+  lovesLoading: boolean;
   className?: string;
 }
 
@@ -17,6 +19,8 @@ export const MediaPageActions: React.FC<Props> = ({
   isSeries,
   liked,
   onClickAddFavorites,
+  onClickWatchMedia,
+  lovesLoading,
   className,
 }) => {
   const [linkIsOpened, setLinkIsOpened] = React.useState(false);
@@ -27,13 +31,17 @@ export const MediaPageActions: React.FC<Props> = ({
 
   return (
     <div ref={ref} className={cn('w-fit flex items-center gap-2', className)}>
-      <Button variant={'secondary'} className="py-6 px-8 text-lg">
+      <Button variant={'secondary'} className="py-6 px-8 text-lg" onClick={onClickWatchMedia}>
         Смотреть {isSeries ? 'сериал' : 'фильм'}
       </Button>
       <Button variant="ghost" className="py-6 px-8 text-lg">
         Трейлер
       </Button>
-      <Button onClick={onClickAddFavorites} variant="ghost" className="py-6 px-4">
+      <Button
+        onClick={onClickAddFavorites}
+        loading={lovesLoading}
+        variant="ghost"
+        className="py-6 px-4 w-[56px] h-[48px]">
         <Heart className={cn(liked && ' fill-white')} />
       </Button>
       <div>

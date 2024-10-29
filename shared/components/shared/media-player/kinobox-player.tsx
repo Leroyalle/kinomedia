@@ -1,12 +1,13 @@
 'use client';
-
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
 
-interface Props {
-  id: number;
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  mediaId: number;
+  className?: string;
 }
 
-export const MediaPlayer: React.FC<Props> = ({ id }) => {
+export const KinoboxPlayer: React.FC<Props> = ({ mediaId, className }) => {
   const containerRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -18,7 +19,8 @@ export const MediaPlayer: React.FC<Props> = ({ id }) => {
     script.onload = () => {
       if (containerRef.current) {
         (window as any).kbox(containerRef.current, {
-          search: { kinopoisk: id },
+          search: { kinopoisk: mediaId },
+          // allowfullscreen: true,
           menu: {
             enabled: false,
           },
@@ -29,7 +31,7 @@ export const MediaPlayer: React.FC<Props> = ({ id }) => {
     return () => {
       document.body.removeChild(script);
     };
-  }, [id]);
+  }, [mediaId]);
 
-  return <div ref={containerRef} className="kinobox_player"></div>;
+  return <div ref={containerRef} className={cn('kinobox_player', className)}></div>;
 };

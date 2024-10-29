@@ -11,8 +11,8 @@ export const Backdrop: React.FC<Props> = ({ imageUrl, className }) => {
     <div
       className={cn(className)}
       style={{
-        backgroundImage: `url(${imageUrl})`,
-        backgroundPosition: 'top 30% right',
+        backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
+        backgroundColor: imageUrl ? 'transparent' : 'black',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
       }}
