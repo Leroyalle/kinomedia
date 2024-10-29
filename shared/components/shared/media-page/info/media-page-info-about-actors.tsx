@@ -21,7 +21,7 @@ export const MediaPageInfoAboutActors: React.FC<Props> = ({ data, className }) =
           <div className="flex gap-x-4 gap-y-1 flex-wrap">
             {persons.map((person) => (
               <Link
-                href={'/'}
+                href={`/person/${person.id}`}
                 className="text-[20px] transition hover:text-[#bc88ff]"
                 key={person.id}>
                 {person.name || person.enName}

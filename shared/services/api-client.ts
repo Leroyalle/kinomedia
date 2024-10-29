@@ -4,6 +4,7 @@ import * as mediaItem from './media-item';
 import * as search from './search-media';
 import * as random from './random';
 import * as user from './user';
+import * as person from './person';
 
 export const Api = {
   categories,
@@ -12,4 +13,5 @@ export const Api = {
   search,
   random,
   user,
+  person,
 };

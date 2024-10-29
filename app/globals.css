@@ -290,3 +290,7 @@
   touch-action: none !important;
   -ms-touch-action: none !important;
 }
+
+.fact-item a {
+  color: blue;
+}

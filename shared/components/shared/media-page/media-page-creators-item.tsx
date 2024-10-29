@@ -3,15 +3,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface Props {
+  id: number;
   imageUrl: string;
   name: string;
-
   profession: string;
 }
 
-export const MediaPageCreatorsItem: React.FC<Props> = ({ imageUrl, name, profession }) => {
+export const MediaPageCreatorsItem: React.FC<Props> = ({ id, imageUrl, name, profession }) => {
   return (
-    <Link href={'/'} className="flex flex-col gap-1 max-w-32">
+    <Link href={`/person/${id}`} className="flex flex-col gap-1 max-w-32">
       <Image
         className="block w-[160px] h-[150px] rounded-[50%] object-cover"
         src={imageUrl}

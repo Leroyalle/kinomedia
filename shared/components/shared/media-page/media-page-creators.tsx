@@ -25,6 +25,7 @@ export const MediaPageCreators: React.FC<Props> = ({ persons, className }) => {
       {persons.map((person, i) => (
         <SwiperSlide className="transition hover:-translate-y-1" key={i}>
           <MediaPageCreatorsItem
+            id={person.id}
             imageUrl={person.photo}
             name={person.name ?? person.enName}
             profession={person.profession}

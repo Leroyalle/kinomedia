@@ -6,4 +6,5 @@ export enum ApiRouter {
   USER = '/user',
   AVATAR = '/user/avatar',
   MY = '/user/my',
+  PERSON = '/person',
 }

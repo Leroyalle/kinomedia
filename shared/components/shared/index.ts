@@ -40,3 +40,4 @@ export { PaymentProfileWrapper } from './payment-profile';
 export { HeaderWrapper } from './header-wrapper';
 export { MyMediaWrapper } from './my';
 export { ShareLink } from './share-link';
+export { PersonWrapper } from './person';
