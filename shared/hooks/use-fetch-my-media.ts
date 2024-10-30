@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
-import { getMyMedia, saveMyMedia, deleteMyMedia } from '../services/user';
 import { MyMedia } from '@/@types/my';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -13,7 +12,7 @@ export const useFetchMyMedia = (auth: boolean = true) => {
 
   const { mutate: saveMutate, isPending: isSavingPending } = useMutation({
     mutationKey: ['save-media'],
-    mutationFn: (values: Omit<MyMedia, 'id' | 'userId'>) => saveMyMedia(values),
+    mutationFn: (values: Omit<MyMedia, 'id' | 'userId'>) => Api.user.saveMyMedia(values),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['my-media'] });
       setLiked(true);
@@ -26,7 +25,7 @@ export const useFetchMyMedia = (auth: boolean = true) => {
 
   const { mutate: deleteMutate, isPending: isDeletingPending } = useMutation({
     mutationKey: ['delete-media'],
-    mutationFn: (mediaId: number) => deleteMyMedia(mediaId),
+    mutationFn: (mediaId: number) => Api.user.deleteMyMedia(mediaId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['my-media'] });
       setLiked(false);
@@ -39,7 +38,7 @@ export const useFetchMyMedia = (auth: boolean = true) => {
 
   const { data: checkedData } = useQuery({
     queryKey: ['my-media-for-check-liked'],
-    queryFn: () => getMyMedia(),
+    queryFn: () => Api.user.getMyMedia(),
     enabled: auth,
     refetchOnWindowFocus: false,
   });
@@ -55,7 +54,7 @@ export const useFetchMyMedia = (auth: boolean = true) => {
       enabled: auth,
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        if (lastPage.length === 0) {
+        if (lastPage.length < perPage) {
           return;
         }
         return lastPageParam + 1;

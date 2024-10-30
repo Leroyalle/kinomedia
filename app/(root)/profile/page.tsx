@@ -6,8 +6,6 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
-  // FIXME: получить данные и закинуть в стор эффектом || layoutEffect
-  // FIXME: если обновить данные на странице edit, а после вернуться назад на страницу profile, данные останутся прежними, пока не перезагружена страница (сделать клиентом)
   if (!session?.user.id) {
     redirect('/not-auth');
   }

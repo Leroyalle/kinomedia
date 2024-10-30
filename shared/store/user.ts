@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getUser, resetAvatar, updateAvatar } from '../services/user';
+import { Api } from '../services/api-client';
 
 type TUserData = {
   id: number | null;
@@ -25,7 +25,7 @@ export const useProfileStore = create<Store>()((set) => ({
   getUserData: async () => {
     try {
       set({ loading: true, error: false });
-      const data = await getUser();
+      const data = await Api.user.getUser();
       set({
         user: {
           id: data.id,
@@ -45,7 +45,7 @@ export const useProfileStore = create<Store>()((set) => ({
   resetAvatar: async () => {
     try {
       set({ loading: true, error: false });
-      const data = await resetAvatar();
+      const data = await Api.user.resetAvatar();
       set((prev) => ({
         user: {
           ...prev.user,
@@ -63,7 +63,7 @@ export const useProfileStore = create<Store>()((set) => ({
   changeAvatar: async (formData: FormData) => {
     try {
       set({ loading: true, error: false });
-      const data = await updateAvatar(formData);
+      const data = await Api.user.updateAvatar(formData);
       set((prev) => ({
         user: {
           ...prev.user,

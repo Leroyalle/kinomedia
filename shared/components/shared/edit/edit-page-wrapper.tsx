@@ -22,7 +22,6 @@ export const EditPageWrapper: React.FC<Props> = ({ className }) => {
   return (
     <div className={className}>
       <BackButton className="pl-0 text-md mb-8 text-white" />
-      {/* FIXME: пофиксить опциональный емейл, инициализируется null в сторе */}
       <EditBlock
         id={Number(user.id)}
         fullName={user.fullName!}

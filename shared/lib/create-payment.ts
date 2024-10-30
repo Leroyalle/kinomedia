@@ -1,6 +1,17 @@
 import { PaymentData } from '@/@types/yookassa';
 import axios from 'axios';
 
+/**
+ * Создает платеж в yookassa, возвращает ответ от сервиса.
+ *
+ * @param {number} details объект с информацией о платеже:
+ *                          amount - общая стоимость,
+ *                          description - описание платежа,
+ *                          orderId - айди заказа.
+ *
+ * @returns объект с информацией о платеже, в котором находится ссылка на оплату.
+ */
+
 interface Props {
   amount: number;
   description: string;
