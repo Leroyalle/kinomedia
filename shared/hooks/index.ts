@@ -9,3 +9,4 @@ export { useFetchSimilarMovies } from './use-fetch-similar-movies';
 export { useFetchRandomMovie } from './use-fetch-random-movie';
 export { useFetchMyMedia } from './use-fetch-my-media';
 export { useCheckIfMediaLiked } from './use-check-if-media-liked';
+export { useToastMessage } from './use-toast-message';

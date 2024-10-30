@@ -15,14 +15,13 @@ export const DeleteUserButton: React.FC<Props> = ({ className }) => {
   const onClickDelete = async () => {
     try {
       if (window.confirm('Удалить аккаунт?')) {
+        await deleteUser();
+
         await signOut({
           callbackUrl: '/',
         });
-        await deleteUser();
 
-        toast.success('Аккаунт успешно удален', {
-          icon: '✅',
-        });
+        toast.success('Аккаунт успешно удален');
       }
     } catch (error) {
       toast.error('Не удалось удалить аккаунт', {

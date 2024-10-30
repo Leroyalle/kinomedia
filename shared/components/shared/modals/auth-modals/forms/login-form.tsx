@@ -36,9 +36,7 @@ export const LoginForm: React.FC<Props> = ({ onClose, className }) => {
       await updateDataPath('/payment');
       onClose();
 
-      toast.success('Вы успешно вошли в аккаунт', {
-        icon: '✅',
-      });
+      toast.success('Вы успешно вошли в аккаунт');
     } catch (error) {
       console.error('Error [LOGIN]', error);
       toast.error('Не удалось войти в аккаунт', {

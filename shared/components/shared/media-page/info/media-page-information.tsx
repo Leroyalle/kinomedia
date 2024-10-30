@@ -15,6 +15,7 @@ interface Props {
   movieLength: number | null;
   seriesLength: number | null;
   ratingKp: number;
+  isSeries: boolean;
   className?: string;
 }
 
@@ -26,11 +27,13 @@ export const MediaPageInformation: React.FC<Props> = ({
   movieLength,
   seriesLength,
   ratingKp,
+  isSeries,
   className,
 }) => {
   const { hours, minutes } = movieLength ? countMovieLength(movieLength) : { hours: 0, minutes: 0 };
   const normalizeHours = hours ? hours + ' ч' : '';
   const normalizeMinutes = minutes ? minutes + ' мин' : '';
+  const link = isSeries ? 'series' : 'films';
   return (
     <div className={cn('grid grid-cols-2 gap-x-4 gap-y-4 max-w-[600px]', className)}>
       {countries && (
@@ -38,9 +41,9 @@ export const MediaPageInformation: React.FC<Props> = ({
           <p className="text-white/50 text-[22px] font-medium">Страны</p>
           <div>
             {countries.map(({ name }, i) => (
-              <Link href={'/'} className="text-[20px] transition hover:text-[#bc88ff]" key={i}>
+              <span key={i} className="text-[20px] transition hover:text-[#bc88ff]">
                 {name}
-              </Link>
+              </span>
             ))}
           </div>
         </div>
@@ -50,7 +53,10 @@ export const MediaPageInformation: React.FC<Props> = ({
           <p className="text-white/50 text-[22px] font-medium">Жанры</p>
           <div>
             {genres.map(({ name }, i) => (
-              <Link href={'/'} className="text-[20px] transition hover:text-[#bc88ff]" key={i}>
+              <Link
+                href={`/${link}?genre=${name}`}
+                className="text-[20px] transition hover:text-[#bc88ff]"
+                key={i}>
                 {name.charAt(0).toUpperCase() + name.slice(1) + ' '}
               </Link>
             ))}

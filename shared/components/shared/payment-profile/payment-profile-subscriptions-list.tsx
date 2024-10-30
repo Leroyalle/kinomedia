@@ -29,9 +29,7 @@ export const PaymentProfileSubscriptionsList: React.FC<Props> = ({ items, classN
   const onClickAlert = async (confirm: Boolean) => {
     try {
       if (confirm) {
-        toast.success('Подписка отменена', {
-          icon: '✅',
-        });
+        toast.success('Подписка отменена');
         await cancelSubscription(activeSubscription.id);
         await updateDataPath('/profile/payment');
         setIsOpened(false);

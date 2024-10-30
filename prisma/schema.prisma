@@ -18,6 +18,9 @@ model User {
   completedSubscription CompletedSubscription[]
   selectedMedia         SelectedMedia[]
 
+  verified         DateTime?
+  verificationCode VerificationCode?
+
   provider   String?
   providerId String?
 
@@ -40,7 +43,7 @@ model Subscription {
 model CompletedSubscription {
   id Int @id @default(autoincrement())
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
   subscription   Subscription @relation(fields: [subscriptionId], references: [id])
@@ -58,7 +61,7 @@ model CompletedSubscription {
 model SelectedMedia {
   id Int @id @default(autoincrement())
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
   mediaId      Int
@@ -73,6 +76,19 @@ model SelectedMedia {
   updatedAt DateTime @updatedAt
 
   @@unique([userId, mediaId])
+}
+
+model VerificationCode {
+  id Int @id @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
+
+  code String
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, code])
 }
 
 enum PaymentStatusEnum {

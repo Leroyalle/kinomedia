@@ -15,9 +15,7 @@ export const UserId: React.FC<Props> = ({ id, className }) => {
   const onClickCopied = () => {
     setIsCopied(true);
     navigator.clipboard.writeText(String(id));
-    toast.success('ID скопирован', {
-      icon: '✅',
-    });
+    toast.success('ID скопирован');
   };
 
   React.useEffect(() => {

@@ -1,6 +1,9 @@
 'use server';
 import { prisma } from '@/prisma/prisma-client';
-import { PaySubscriptionTemplate } from '@/shared/components/shared/email-templates';
+import {
+  PaySubscriptionTemplate,
+  VerificationCodeTemplate,
+} from '@/shared/components/shared/email-templates';
 import { createPayment, sendEmail } from '@/shared/lib';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { ActiveStatusEnum, PaymentStatusEnum, Prisma } from '@prisma/client';
@@ -16,16 +19,34 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     });
 
     if (user) {
+      if (!user?.verified) {
+        throw new Error('Почта не подтверждена');
+      }
       throw new Error('Пользователь уже существует');
     }
 
-    await prisma.user.create({
+    const createdUser = await prisma.user.create({
       data: {
         email: body.email,
         fullName: body.fullName,
         password: hashSync(body.password, 10),
       },
     });
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    await prisma.verificationCode.create({
+      data: {
+        code,
+        userId: createdUser.id,
+      },
+    });
+
+    await sendEmail(
+      createdUser.email,
+      'Kinomedia / 📩 Подтверждение регистрации',
+      VerificationCodeTemplate({ code }),
+    );
   } catch (error) {
     console.log('Error [REGISTER_USER]', error);
     throw error;

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import { useSearchParams } from 'next/navigation';
 import qs from 'qs';
 
@@ -12,8 +12,6 @@ interface ReturnProps {
 export interface QueryFilters {
   genre?: string;
 }
-
-// TODO: отрефакторить код
 
 export const useFilters = (): ReturnProps => {
   const isMounted = React.useRef(false);
@@ -31,8 +29,7 @@ export const useFilters = (): ReturnProps => {
       const query = qs.stringify(params, {
         arrayFormat: 'comma',
       });
-      // TODO: убрать push из истории
-      router.push(`?${query}`, { scroll: false });
+      router.replace(`?${query}`, { scroll: false });
     }
     isMounted.current = true;
   }, [genreName]);

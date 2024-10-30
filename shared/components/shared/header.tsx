@@ -8,7 +8,7 @@ import { SearchInput } from './search-input';
 import { navigationData } from '@/shared/constants';
 import { Logo } from './logo';
 import { PaymentButton } from './payment-button';
-import { useScrollPage } from '@/shared/hooks';
+import { useScrollPage, useToastMessage } from '@/shared/hooks';
 
 interface Props {
   session: boolean;
@@ -17,6 +17,8 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ className, session }) => {
   const visible = useScrollPage();
+  useToastMessage();
+
   return (
     <header
       className={cn(

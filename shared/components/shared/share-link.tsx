@@ -15,9 +15,7 @@ export const ShareLink: React.FC<Props> = ({ items, className }) => {
   const copiedUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${pathName}`;
   const onClickLinkCopy = () => {
     navigator.clipboard.writeText(copiedUrl);
-    toast.success('Ссылка скопирована', {
-      icon: '✅',
-    });
+    toast.success('Ссылка скопирована');
   };
 
   return (

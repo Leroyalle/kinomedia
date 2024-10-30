@@ -17,7 +17,7 @@ export const useFetchMyMedia = (auth: boolean = true) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['my-media'] });
       setLiked(true);
-      toast.success('Добавлено!', { icon: '✅' });
+      toast.success('Добавлено!');
     },
     onError: () => {
       toast.error('Не удалось удалить!', { icon: '❌' });
@@ -30,7 +30,7 @@ export const useFetchMyMedia = (auth: boolean = true) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['my-media'] });
       setLiked(false);
-      toast.success('Удалено!', { icon: '🚮' });
+      toast.success('Удалено!');
     },
     onError: () => {
       toast.error('Не удалось удалить!', { icon: '❌' });

@@ -48,6 +48,7 @@ export const MediaPageInfoBlock: React.FC<Props> = ({ item, className }) => {
           movieLength={item.movieLength}
           seriesLength={item.seriesLength}
           ratingKp={item.rating.kp}
+          isSeries={item.isSeries}
         />
       )}
     </section>

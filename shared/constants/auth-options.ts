@@ -47,6 +47,10 @@ export const authOptions: AuthOptions = {
           return null;
         }
 
+        if (!findUser.verified) {
+          return null;
+        }
+
         return {
           id: findUser.id,
           name: findUser.fullName,
@@ -106,6 +110,7 @@ export const authOptions: AuthOptions = {
               fullName: user.name || 'User #' + user.id,
               password: hashSync(user.id.toString(), 10),
               image: profile?.image,
+              verified: new Date(),
               provider: account?.provider,
               providerId: account?.providerAccountId,
             },

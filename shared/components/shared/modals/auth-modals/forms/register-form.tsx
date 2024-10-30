@@ -33,9 +33,7 @@ export const RegisterForm: React.FC<Props> = ({ onClose, className }) => {
 
       onClose();
 
-      toast.success('Вы успешно зарегестрировались', {
-        icon: '✅',
-      });
+      toast.success('Письмо с кодом отправлено на почту');
     } catch (error) {
       console.error('Error [REGISTER]', error);
       toast.error('Не удалось зарегестрироваться', {
