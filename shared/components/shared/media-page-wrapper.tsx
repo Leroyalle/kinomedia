@@ -81,7 +81,7 @@ export const MediaPageWrapper: React.FC<Props> = ({ auth, subscription, item, cl
           />
         </div>
       </section>
-      {isOpened && <MediaPlayer mediaId={item.id} onClose={() => setIsOpened(false)} />}
+      {/* {isOpened && <MediaPlayer mediaId={item.id} onClose={() => setIsOpened(false)} />} */}
       <InfoBlock item={item} />
       <div className="flex flex-col gap-2 mt-10">
         <Title text="Актеры и создатели" size={'lg'} />
