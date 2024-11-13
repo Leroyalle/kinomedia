@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "prisma:push": "prisma db push",
@@ -45,6 +45,7 @@
     "react-intersection-observer": "^9.13.1",
     "react-use": "^17.5.1",
     "resend": "^4.0.0",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.12",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",

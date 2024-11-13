@@ -6,6 +6,7 @@ import { X } from 'lucide-react';
 import { Skeleton } from '@/shared/components/ui';
 import { useProfileStore } from '@/shared/store';
 import { SelectFile } from '../../select-file';
+import { updateDataPath } from '@/app/actions';
 
 interface Props {
   imageUrl?: string | null;
